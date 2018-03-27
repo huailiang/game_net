@@ -4,7 +4,8 @@
 
 **/Server/Debug/
 **/Server/x64/
-**/Server/Server/x64
+**/Server/.vs/
+**/Server/Server/x64/
 **/Server/Server/Debug/
 **/Server/Server/libprotocd.lib
 **/Server/Server/libprotobufd.lib
