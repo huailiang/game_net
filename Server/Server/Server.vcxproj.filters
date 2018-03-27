@@ -4,9 +4,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="game.pb.cc" />
     <ClCompile Include="testpb.cpp" />
+    <ClCompile Include="gamesocket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.pb.h" />
     <ClInclude Include="testpb.h" />
+    <ClInclude Include="gamesocket.h" />
   </ItemGroup>
 </Project>

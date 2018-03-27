@@ -16,7 +16,7 @@ public class TestProto : MonoBehaviour
 
     private void OnGUI()
     {
-        if(GUI.Button(new Rect(20, 20, 100, 60), "2File"))
+        if(GUI.Button(new Rect(20, 20, 100, 60), "Save"))
         {
             WriteProtoBuf();
         }

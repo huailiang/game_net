@@ -23,7 +23,7 @@ public class TcpClientHandler
 		ipEnd=new IPEndPoint(ip,6000); //服务器端口号
 		 
 		//开启一个线程连接，必须的，否则主线程卡死
-		connectThread=new Thread(new ThreadStart(SocketReceive));
+		connectThread=new Thread(new ThreadStart(Receive));
 		connectThread.Start();
 	}
 	 
@@ -43,7 +43,7 @@ public class TcpClientHandler
 		Debug.Log(recvStr);
 	}
 	 
-	public void SocketSend(string sendStr)
+	public void Send(string sendStr)
 	{
 		//清空发送缓存
 		sendData=new byte[1024];
@@ -52,8 +52,13 @@ public class TcpClientHandler
 		//发送
 		serverSocket.Send(sendData,sendData.Length,SocketFlags.None);
 	}
+
+    public void Send(byte[] bytes)
+    {
+        serverSocket.Send(bytes, bytes.Length, SocketFlags.None);
+    }
 	 
-	void SocketReceive()
+	private void Receive()
 	{
 		SocketConnet();
 		//不断接收服务器发来的数据

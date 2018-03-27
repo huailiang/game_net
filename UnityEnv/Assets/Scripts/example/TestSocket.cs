@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
+using XNet;
 
 public class TestSocket : MonoBehaviour
 {
 
     TcpClientHandler handle;
 
-    // Use this for initialization
     void Start()
     {
         handle = new TcpClientHandler();
@@ -15,27 +16,36 @@ public class TestSocket : MonoBehaviour
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(20, 20, 100, 60), "Send"))
+        if (GUI.Button(new Rect(20, 20, 100, 60), "Hello World"))
         {
-            if(handle!=null)
+            if (handle != null)
             {
-                handle.SocketSend("hell world!");
+                handle.Send("hell world!");
             }
         }
-        if(GUI.Button(new Rect(20,140,100,60),"Test"))
+        if (GUI.Button(new Rect(20, 140, 100, 60), "Person"))
         {
-            handle.SocketSend("OK, Sync!");
+            People p = new People();
+            p.name = "hug";
+            p.id = 12345;
+            p.email = "penghuailiang@126.com";
+            p.snip.Add(2);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                new PBMessageSerializer().Serialize(ms, p);
+                byte[] pBuffer = ms.ToArray();
+                handle.Send(pBuffer);
+            }
         }
     }
 
 
     private void OnApplicationQuit()
     {
-        if(handle!=null)
+        if (handle != null)
         {
             handle.SocketQuit();
         }
     }
-
 
 }
