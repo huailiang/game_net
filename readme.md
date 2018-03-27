@@ -1,3 +1,9 @@
+<p align="center">
+    <img src="https://raw.githubusercontent.com/sschmid/Entitas-CSharp/master/Readme/Images/MadeForUnity.png">
+    <img src="http://sem.tanzhouedu.com/shiguang/it/iframe/img/C_C++.jpg">
+    <img src="https://huailiang.github.io/img/avatar-Alex.jpg">
+</p>
+
 在tools/ProtobufTool/目录中：
 
 客户端是Unity, 采用c#语言，服务器端使用的是c++。
@@ -21,6 +27,7 @@ tools目录：
 
 服务端采用的protobuf版本是：protobuf-cpp-3.1.0， 对应的下载地址：https://github.com/google/protobuf/releases/download/v3.1.0/protobuf-cpp-3.1.0.zip
 
-服务器用到的protobuf编译生成的libprotocd.lib、libprotobufd.lib、protoc.exe由于文件太大， 没有上传。读者可以参照csdn这篇paper: https://blog.csdn.net/program_anywhere/article/details/77365876  自行生成
+服务器用到的protobuf编译生成的libprotocd.lib、libprotobufd.lib、protoc.exe由于文件太大， 没有上传。
+读者自行生成，可以参照csdn这篇paper: https://blog.csdn.net/program_anywhere/article/details/77365876  
 
 服务器socket测试只支持windows平台，其他平台（linux）没有测试
