@@ -1,6 +1,6 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/sschmid/Entitas-CSharp/master/Readme/Images/MadeForUnity.png" width="200" height="100">
-    <img src="http://sem.tanzhouedu.com/shiguang/it/iframe/img/C_C++.jpg" width="120" height="100">
+    <img src="http://sem.tanzhouedu.com/shiguang/it/iframe/img/C_C++.jpg" width="90" height="100">
     <img src="https://huailiang.github.io/img/avatar-Alex.jpg" width="120" height="100">
 </p>
 
