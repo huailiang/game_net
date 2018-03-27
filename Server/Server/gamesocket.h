@@ -8,7 +8,8 @@
 
 #pragma comment(lib,"ws2_32.lib")  
 
-#define max 1024
+#define max_buff 1024
+#define len_head 2
 
 class gamesocket
 {

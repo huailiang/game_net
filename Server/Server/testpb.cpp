@@ -31,8 +31,6 @@ void testpb::serial()
 		cerr << "serializer error" << endl;
 	}
 	output.close();
-	/*cout << person.name() << endl;
-	cout << person.email() << endl;*/
 	deserial();
 }
 

@@ -55,6 +55,8 @@ public class TcpClientHandler
 
     public void Send(byte[] bytes)
     {
+        //System.Array.Copy()
+
         serverSocket.Send(bytes, bytes.Length, SocketFlags.None);
     }
 	 
@@ -72,6 +74,7 @@ public class TcpClientHandler
 				continue;
 			}
 			recvStr=Encoding.ASCII.GetString(recvData,0,recvLen);
+            
 			Debug.Log(recvStr);
 		}
 	}
@@ -88,7 +91,7 @@ public class TcpClientHandler
 		return returnStr;
 	}
 
-	public void SocketQuit()
+	public void Quit()
 	{
 		//关闭线程
 		if(connectThread!=null)

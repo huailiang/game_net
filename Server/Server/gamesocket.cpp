@@ -55,7 +55,7 @@ void gamesocket::DO()
 	SOCKET sClient;
 	sockaddr_in remoteAddr;
 	int nAddrlen = sizeof(remoteAddr);
-	char revData[max];
+	char revData[max_buff];
 	while (true)
 	{
 		printf("\n等待连接...\n");
@@ -68,14 +68,21 @@ void gamesocket::DO()
 		printf("接受到一个连接：%s \r\n", inet_ntoa(remoteAddr.sin_addr));
 
 		//接收数据  
-		int ret = recv(sClient, revData, max, 0);
+		int ret = recv(sClient, revData, max_buff, 0);
 		if (ret > 0)
 		{
 			revData[ret] = 0x00;
-			//printf(revData);
-
 			XNet::People person;
-			if (!person.ParseFromArray(revData, ret))
+			char* pb = ((char*)revData + len_head);
+
+			char head[len_head];
+			for (int i = 0; i < len_head; i++)
+			{
+				head[i] = revData[i];
+			}
+			short shead = (short)(*head);
+			cout << "head is:"<< shead << endl;
+			if (!person.ParseFromArray(pb, ret - len_head))
 			{
 				printf("parse person error");
 			}

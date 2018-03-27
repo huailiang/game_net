@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 using XNet;
+using System.Text;
 
 public class TestSocket : MonoBehaviour
 {
@@ -9,9 +10,7 @@ public class TestSocket : MonoBehaviour
 
     void Start()
     {
-        handle = new TcpClientHandler();
-        handle.InitSocket();
-
+        XNetworkMgr.sington.Init();
     }
 
     private void OnGUI()
@@ -20,7 +19,8 @@ public class TestSocket : MonoBehaviour
         {
             if (handle != null)
             {
-                handle.Send("hell world!");
+                byte[] bytes = Encoding.ASCII.GetBytes("hello world!");
+                XNetworkMgr.sington.Send(bytes);
             }
         }
         if (GUI.Button(new Rect(20, 140, 100, 60), "Person"))
@@ -34,8 +34,17 @@ public class TestSocket : MonoBehaviour
             {
                 new PBMessageSerializer().Serialize(ms, p);
                 byte[] pBuffer = ms.ToArray();
-                handle.Send(pBuffer);
+                XNetworkMgr.sington.Send(pBuffer);
             }
+        }
+        if (GUI.Button(new Rect(20, 260, 100, 60), "Person-proto"))
+        {
+            People p = new People();
+            p.name = "hugx";
+            p.id = 12345;
+            p.email = "penghuailiang@126.com";
+            p.snip.Add(2);
+            XNetworkMgr.sington.Send(new PeopleMsg(p));
         }
     }
 
@@ -44,7 +53,7 @@ public class TestSocket : MonoBehaviour
     {
         if (handle != null)
         {
-            handle.SocketQuit();
+            handle.Quit();
         }
     }
 
