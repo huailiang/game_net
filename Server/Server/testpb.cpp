@@ -51,10 +51,10 @@ void testpb::deserial()
 	cout << "id:" << person.id() << endl;
 	cout << "name:" << person.name() << endl;
 	cout << "email:" << person.email() << endl;
-	cout << "snip count:" << person.snip_size() << endl;
+	/*cout << "snip count:" << person.snip_size() << endl;
 	for (int i = 0; i < person.snip_size(); i++)
 	{
 		cout << person.snip(i) << endl;
-	}
+	}*/
 	in.close();
 }
