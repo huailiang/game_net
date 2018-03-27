@@ -1,0 +1,15 @@
+package XNet;  
+  
+message People {  
+  required string name = 1;  
+  required int32 id = 2;  
+  required string email = 3;  
+  repeated int32 snip = 4;
+}
+
+
+message Student{
+	required string name = 1;  
+  	required int32 age = 2;  
+  	optional int32 num = 3;
+}
