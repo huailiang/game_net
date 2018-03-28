@@ -8,23 +8,27 @@ using XNet;
 
 public class TcpClientHandler
 {
+
+    const ushort len_head = 2;
+    const ushort max_buff = 1024;
+    const string sock_ip = "127.0.0.1";
+    const int sock_port = 6000;
+
     Socket serverSocket;
     IPAddress ip;
     IPEndPoint ipEnd;
     string recvStr; //接收的字符串
-    byte[] recvData = new byte[1024];
-    byte[] sendData = new byte[1024];
+    byte[] recvData = new byte[max_buff];
+    byte[] sendData = new byte[max_buff];
     int recvLen; //接收的数据长度
     Thread connectThread;
-    const ushort len_head = 2;
-    const ushort max_buff = 1024;
 
 
     public void InitSocket()
     {
         //定义服务器的IP和端口，端口与服务器对应
-        ip = IPAddress.Parse("127.0.0.1"); //可以是局域网或互联网ip，此处是本机
-        ipEnd = new IPEndPoint(ip, 6000); //服务器端口号
+        ip = IPAddress.Parse(sock_ip); //可以是局域网或互联网ip，此处是本机
+        ipEnd = new IPEndPoint(ip, sock_port); //服务器端口号
 
         //开启一个线程连接，必须的，否则主线程卡死
         connectThread = new Thread(new ThreadStart(Receive));
@@ -42,7 +46,7 @@ public class TcpClientHandler
     public void Send(string sendStr)
     {
         //清空发送缓存
-        sendData = new byte[1024];
+        sendData = new byte[max_buff];
 
         sendData = Encoding.ASCII.GetBytes(sendStr);
         serverSocket.Send(sendData, sendData.Length, SocketFlags.None);
@@ -55,33 +59,31 @@ public class TcpClientHandler
 
     private void Receive()
     {
-        SocketConnet();
-
-        while (true)
+        try
         {
-            recvData = new byte[1024];
-            recvLen = serverSocket.Receive(recvData);
-            if (recvLen == 0)
-            {
-                SocketConnet();
-            }
+            SocketConnet();
 
-            try
+            while (true)
             {
+                recvData = new byte[1024];
+                recvLen = serverSocket.Receive(recvData);
+                if (recvLen == 0)
+                {
+                    SocketConnet();
+                }
+
                 recvStr = Encoding.ASCII.GetString(recvData, 0, recvLen);
                 byte[] head = new byte[len_head];
-                head[0] = recvData[0];
-                head[1] = recvData[1];
+                Array.Copy(recvData, 0, head, 0, len_head);
                 ushort uid = BitConverter.ToUInt16(head, 0);
-                Debug.Log("uid: " + uid + " len: " + recvLen + " data: " + recvData.Length);
                 byte[] buff = new byte[max_buff - len_head];
                 Array.Copy(recvData, len_head, buff, 0, buff.Length);
                 XNetworkMgr.sington.OnProcess(uid, buff, recvLen - len_head);
             }
-            catch (Exception e)
-            {
-                Debug.Log("err:" + e.Message + " stack:" + e.StackTrace);
-            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("err:" + e.Message + " stack:" + e.StackTrace);
         }
     }
 

@@ -6,13 +6,17 @@ using UnityEngine;
 
 public class UdpClientHandler
 {
+    const ushort max_buff = 1024;
+    const string sock_ip = "127.0.0.1";
+    const int sock_port = 6000;
+    
     Socket socket;
-    EndPoint serverEnd; //服务端
+    EndPoint serverEnd; 
     IPEndPoint ipEnd; //服务端端口
     string recvStr; //接收的字符串
     string sendStr; //发送的字符串
-    byte[] recvData = new byte[1024]; //接收的数据，必须为字节
-    byte[] sendData = new byte[1024]; //发送的数据，必须为字节
+    byte[] recvData = new byte[max_buff]; //接收的数据，必须为字节
+    byte[] sendData = new byte[max_buff]; //发送的数据，必须为字节
     int recvLen; //接收的数据长度
     Thread connectThread; //连接线程
 
@@ -20,7 +24,7 @@ public class UdpClientHandler
     public void InitSocket()
     {
         //定义连接的服务器ip和端口，可以是本机ip，局域网，互联网
-        ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8888);
+        ipEnd = new IPEndPoint(IPAddress.Parse(sock_ip), sock_port);
         //定义套接字类型,在主线程中定义
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
@@ -39,7 +43,7 @@ public class UdpClientHandler
     public void SocketSend(string sendStr)
     {
         //清空发送缓存
-        sendData = new byte[1024];
+        sendData = new byte[max_buff];
 
         sendData = Encoding.ASCII.GetBytes(sendStr);
         socket.SendTo(sendData, sendData.Length, SocketFlags.None, ipEnd);

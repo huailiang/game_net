@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using XNet;
+using System.Collections;
 
 public class TestSocket : MonoBehaviour
 {
@@ -10,16 +11,16 @@ public class TestSocket : MonoBehaviour
         XNetworkMgr.sington.Init();
     }
 
+    private void Update()
+    {
+        XNetworkMgr.sington.Update();
+    }
+
     private void OnGUI()
     {
         if (GUI.Button(new Rect(20, 60, 100, 60), "Person-proto"))
         {
-            People p = new People();
-            p.name = "hugx";
-            p.id = 12345;
-            p.email = "penghuailiang@126.com";
-            p.snip.Add(2);
-            XNetworkMgr.sington.Send(p);
+            StartCoroutine(YieldPersonMsg());
         }
         if (GUI.Button(new Rect(20, 160, 100, 60), "Student"))
         {
@@ -28,9 +29,28 @@ public class TestSocket : MonoBehaviour
             s.name = "hug";
             s.num = 1002;
             XNetworkMgr.sington.Send(s);
+            XNetworkMgr.sington.Send(s);
         }
     }
 
+    /// <summary>
+    /// 测试连发
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator YieldPersonMsg()
+    {
+        People p = new People();
+        p.name = "hugx";
+        p.id = 12345;
+        p.email = "penghuailiang@126.com";
+        p.snip.Add(2);
+        XNetworkMgr.sington.Send(p);
+        yield return new WaitForSeconds(0.1f);
+        XNetworkMgr.sington.Send(p);
+        yield return new WaitForSeconds(0.1f);
+        XNetworkMgr.sington.Send(p);
+        yield return new WaitForSeconds(0.1f);
+    }
 
     private void OnApplicationQuit()
     {
