@@ -40,6 +40,7 @@ public class TcpClientHandler
         if (serverSocket != null) serverSocket.Close();
         serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         serverSocket.Connect(ipEnd);
+        Array.Clear(recvData, 0, max_buff);
         recvLen = serverSocket.Receive(recvData);
     }
 
@@ -65,13 +66,10 @@ public class TcpClientHandler
 
             while (true)
             {
-                recvData = new byte[1024];
-                recvLen = serverSocket.Receive(recvData);
                 if (recvLen == 0)
                 {
                     SocketConnet();
                 }
-
                 recvStr = Encoding.ASCII.GetString(recvData, 0, recvLen);
                 byte[] head = new byte[len_head];
                 Array.Copy(recvData, 0, head, 0, len_head);
@@ -79,11 +77,12 @@ public class TcpClientHandler
                 byte[] buff = new byte[max_buff - len_head];
                 Array.Copy(recvData, len_head, buff, 0, buff.Length);
                 XNetworkMgr.sington.OnProcess(uid, buff, recvLen - len_head);
+                recvLen = 0;
             }
         }
         catch (Exception e)
         {
-            Debug.LogError("err:" + e.Message + " stack:" + e.StackTrace);
+            Debug.Log("err:" + e.Message + " stack:" + e.StackTrace);
         }
     }
 
@@ -100,13 +99,17 @@ public class TcpClientHandler
 
     public void Quit()
     {
+        if (serverSocket != null)
+        {
+            //serverSocket.Disconnect(false);
+            serverSocket.Close();
+        }
         if (connectThread != null)
         {
             connectThread.Interrupt();
             connectThread.Abort();
         }
-        if (serverSocket != null)
-            serverSocket.Close();
+        
         Debug.Log("diconnect");
     }
 

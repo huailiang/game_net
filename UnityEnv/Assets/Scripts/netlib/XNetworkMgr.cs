@@ -80,8 +80,8 @@ namespace XNet
                 byte[] buff = new byte[pBuffer.Length + pId.Length];
                 pId.CopyTo(buff, 0);
                 pBuffer.CopyTo(buff, pId.Length);
-                Send(buff);
                 queue.Enqueue(new NetSerial() { time = Time.time, uid = uid });
+                Send(buff);
             }
         }
 

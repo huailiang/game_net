@@ -37,3 +37,7 @@ tools目录：
 读者自行生成，可以参照csdn这篇paper: https://blog.csdn.net/program_anywhere/article/details/77365876  
 
 服务器socket测试只支持windows平台，其他平台（linux）没有测试
+
+
+运行效果如下图：
+<img src="tools/img/show.gif">
