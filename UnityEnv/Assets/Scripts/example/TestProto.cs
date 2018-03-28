@@ -42,6 +42,7 @@ public class TestProto : MonoBehaviour
 	    {
 	        new PBMessageSerializer().Serialize(ms, proto);
 	        Byte[] pBuffer = ms.ToArray();
+            Util.PrintBytes(pBuffer);
 	        File.WriteAllBytes(basePath+"/data/data.bytes",pBuffer);
 	    }
 	}

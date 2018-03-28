@@ -15,7 +15,7 @@ namespace XNet
 
         public virtual void OnTimeout() { }
 
-        public void OnRecv(byte[] pBuffer, int nSize)
+        public void OnProcess(byte[] pBuffer, int nSize)
         {
             using (MemoryStream ms = new MemoryStream(pBuffer, 0, nSize))
             {
@@ -31,8 +31,7 @@ namespace XNet
             id = 0;
             GC.SuppressFinalize(this);
         }
-
-
+        
     }
 
 }

@@ -1,4 +1,19 @@
 #include "PeopleMsg.h"
+#include "networkmgr.h"
+
+PeopleMsg::PeopleMsg()
+{
+}
+
+PeopleMsg::~PeopleMsg()
+{
+	delete ptr;
+}
+
+void PeopleMsg::set(XNet::People* p)
+{
+	this->ptr = p;
+}
 
 void PeopleMsg::OnProcess(char* pb, int length)
 {
@@ -15,10 +30,33 @@ void PeopleMsg::OnProcess(char* pb, int length)
 		cout << "name: " << person.name() << endl;
 		cout << "email:" << person.email() << endl;
 	}
-}
 
+	// reply to  client
+	XNet::People* p = new XNet::People();
+	p->set_email("rectvv@gmail.com");
+	p->set_id(10086);
+	p->set_name("Rect");
+	p->add_snip(2);
+	p->add_snip(4);
+	set(p);
+	networkmgr::Instance()->send(this);
+}
 
 ushort PeopleMsg::getuid()
 {
 	return 1001;
+}
+
+char* PeopleMsg::getbuff()
+{
+	assert(ptr);
+	buffsize = ptr->ByteSize();
+	void* buff = malloc(buffsize);
+	ptr->SerializeToArray(buff, buffsize);
+	//for (size_t i = 0; i < buffsize; i++)
+	//{
+	//	cout << (ushort)*((unsigned char*)buff + (int)i) << " ";
+	//}
+	//cout << endl;
+	return (char*)buff;
 }

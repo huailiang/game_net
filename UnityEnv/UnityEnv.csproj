@@ -13,14 +13,12 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -297,11 +295,11 @@
     <Compile Include="Assets\Scripts\example\TestProto.cs" />
     <Compile Include="Assets\Scripts\example\TestSocket.cs" />
     <Compile Include="Assets\Scripts\messgae\PeopleMsg.cs" />
-    <Compile Include="Assets\Scripts\messgae\Proto.cs" />
-    <Compile Include="Assets\Scripts\messgae\StudentMgr.cs" />
-    <Compile Include="Assets\Scripts\netlib\XNetworkMgr.cs" />
+    <Compile Include="Assets\Scripts\messgae\StudentMsg.cs" />
+    <Compile Include="Assets\Scripts\netlib\Proto.cs" />
     <Compile Include="Assets\Scripts\netlib\TcpClientHandler.cs" />
     <Compile Include="Assets\Scripts\netlib\UdpClientHandler.cs" />
+    <Compile Include="Assets\Scripts\netlib\XNetworkMgr.cs" />
     <Compile Include="Assets\Scripts\util\Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

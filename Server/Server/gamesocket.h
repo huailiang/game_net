@@ -19,6 +19,7 @@ public:
 
 	bool init();
 	void DO();
+	void Send(ushort uid, char* data,int len);
 	void process(ushort uid, char* pb,int len);
 
 private:
@@ -26,6 +27,9 @@ private:
 	WSADATA wsaData;
 	SOCKET slisten;
 	u_short port;
+
+	SOCKET sClient;
+	sockaddr_in remoteAddr;
 };
 
 

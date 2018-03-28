@@ -52,8 +52,6 @@ void gamesocket::DO()
 	}
 
 	//循环接收数据  
-	SOCKET sClient;
-	sockaddr_in remoteAddr;
 	int nAddrlen = sizeof(remoteAddr);
 	char revData[max_buff];
 	while (true)
@@ -84,15 +82,22 @@ void gamesocket::DO()
 			ushort uid = head[1] * 256 + head[0];
 			process(uid, pb, ret - len_head);
 		}
-
-		//发送数据  
-		const char * sendData = "hello,TCP client. The message is from server!";
-		send(sClient, sendData, strlen(sendData), 0);
-		closesocket(sClient);
 	}
 
 	closesocket(slisten);
 	WSACleanup();
+}
+
+//发送数据  
+void gamesocket::Send(ushort uid, char* data,int len)
+{
+	char* pid = (char*)(&uid);
+	char buff[max_buff];
+	memset(buff, 0, sizeof(buff));
+	memcpy(buff, pid, len_head);
+	memcpy(buff + 2, data, len);
+	send(sClient, buff, strlen(buff), 0);
+	closesocket(sClient);
 }
 
 

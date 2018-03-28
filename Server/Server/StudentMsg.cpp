@@ -1,4 +1,19 @@
 #include "StudentMsg.h"
+#include "networkmgr.h"
+
+StudentMsg::StudentMsg()
+{
+}
+
+StudentMsg::~StudentMsg()
+{
+	delete ptr;
+}
+
+void StudentMsg::set(XNet::Student* p)
+{
+	this->ptr = p;
+}
 
 void StudentMsg::OnProcess(char* pb, int length)
 {
@@ -14,6 +29,10 @@ void StudentMsg::OnProcess(char* pb, int length)
 		cout << "name: " << student.name() << endl;
 		cout << "num:" << student.num() << endl;
 	}
+
+	//reply to  client
+	set(&student);
+	networkmgr::Instance()->send(this);
 }
 
 
@@ -21,3 +40,14 @@ ushort StudentMsg::getuid()
 {
 	return 1002;
 }
+
+
+char* StudentMsg::getbuff()
+{
+	assert(ptr);
+	buffsize = ptr->ByteSize();
+	void* buff = malloc(buffsize);
+	ptr->SerializeToArray(buff, buffsize);
+	return (char*)buff;
+}
+

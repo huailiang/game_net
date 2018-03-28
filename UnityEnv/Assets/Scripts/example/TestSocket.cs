@@ -4,7 +4,6 @@ using XNet;
 public class TestSocket : MonoBehaviour
 {
 
-    TcpClientHandler handle;
 
     void Start()
     {
@@ -20,7 +19,7 @@ public class TestSocket : MonoBehaviour
             p.id = 12345;
             p.email = "penghuailiang@126.com";
             p.snip.Add(2);
-            XNetworkMgr.sington.Send(new PeopleMsg(p));
+            XNetworkMgr.sington.Send(p);
         }
         if (GUI.Button(new Rect(20, 160, 100, 60), "Student"))
         {
@@ -28,17 +27,14 @@ public class TestSocket : MonoBehaviour
             s.age = 12;
             s.name = "hug";
             s.num = 1002;
-            XNetworkMgr.sington.Send(new StudentMgr(s));
+            XNetworkMgr.sington.Send(s);
         }
     }
 
 
     private void OnApplicationQuit()
     {
-        if (handle != null)
-        {
-            handle.Quit();
-        }
+        XNetworkMgr.sington.Dispose();
     }
 
 }

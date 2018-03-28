@@ -3,13 +3,12 @@ using UnityEngine;
 
 namespace XNet
 {
-    class StudentMgr : Proto
+    class StudentMsg : Proto
     {
 
-        public StudentMgr(object _pb)
+        public StudentMsg()
         {
             id = 1002;
-            pb = _pb;
         }
 
         public override void OnReply(object proto)

@@ -9,6 +9,12 @@ class PeopleMsg :public protomsg
 public:
 	void OnProcess(char* pb, int length);
 	ushort getuid();
+	char* getbuff();
+	PeopleMsg();
+	~PeopleMsg();
+	void set(XNet::People* p);
+private:
+	XNet::People* ptr;
 
 };
 

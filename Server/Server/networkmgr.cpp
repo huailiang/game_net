@@ -10,6 +10,7 @@ networkmgr::networkmgr()
 
 networkmgr::~networkmgr()
 {
+	unload();
 }
 
 void networkmgr::unload()
@@ -19,6 +20,7 @@ void networkmgr::unload()
 	{
 		delete iter->second;
 	}
+	delete sock;
 }
 
 
@@ -26,6 +28,14 @@ void networkmgr::regist()
 {
 	innerregist(new PeopleMsg());
 	innerregist(new StudentMsg());
+
+	
+}
+
+void networkmgr::init()
+{
+	this->sock = new gamesocket();
+	this->sock->DO();
 }
 
 
@@ -41,4 +51,12 @@ void networkmgr::process(ushort uid, char* pb, int len)
 	{
 		mp[uid]->OnProcess(pb, len);
 	}
+}
+
+void networkmgr::send(protomsg* msg)
+{
+	char* buff = msg->getbuff();
+	int size = msg->getbuffSize();
+	ushort uid = msg->getuid();
+	this->sock->Send(uid, buff,size);
 }

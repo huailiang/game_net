@@ -6,11 +6,11 @@ namespace XNet
     class PeopleMsg : Proto
     {
 
-        public PeopleMsg(object _pb)
+        public PeopleMsg()
         {
             id = 1001;
-            pb = _pb;
         }
+        
 
         public override void OnReply(object proto)
         {

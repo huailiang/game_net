@@ -2,3 +2,7 @@
 
 
 
+int protomsg::getbuffSize()
+{
+	return buffsize;
+}
