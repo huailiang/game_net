@@ -72,26 +72,17 @@ void gamesocket::DO()
 		if (ret > 0)
 		{
 			revData[ret] = 0x00;
-			XNet::People person;
+			
 			char* pb = ((char*)revData + len_head);
 
-			char head[len_head];
+			unsigned char head[len_head];
+			memset(head, 0, sizeof(head));
 			for (int i = 0; i < len_head; i++)
 			{
 				head[i] = revData[i];
 			}
-			short shead = (short)(*head);
-			cout << "head is:"<< shead << endl;
-			if (!person.ParseFromArray(pb, ret - len_head))
-			{
-				printf("parse person error");
-			}
-			else
-			{
-				cout << "id: " << person.id() << endl;
-				cout << "name: " << person.name() << endl;
-				cout << "email:" << person.email() << endl;
-			}
+			ushort uid = head[1] * 256 + head[0];
+			process(uid, pb, ret - len_head);
 		}
 
 		//·¢ËÍÊı¾İ  
@@ -102,4 +93,23 @@ void gamesocket::DO()
 
 	closesocket(slisten);
 	WSACleanup();
+}
+
+
+void gamesocket::process(ushort uid, char* pb,int len)
+{
+	cout << "uid is: " << uid << endl;
+
+	XNet::People person;
+
+	if (!person.ParseFromArray(pb, len))
+	{
+		printf("parse person error");
+	}
+	else
+	{
+		cout << "id: " << person.id() << endl;
+		cout << "name: " << person.name() << endl;
+		cout << "email:" << person.email() << endl;
+	}
 }

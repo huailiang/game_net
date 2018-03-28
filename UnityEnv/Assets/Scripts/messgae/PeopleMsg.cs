@@ -8,7 +8,7 @@ namespace XNet
 
         public PeopleMsg(object _pb)
         {
-            id = 12;
+            id = 1001;
             pb = _pb;
         }
 

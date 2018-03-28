@@ -5,9 +5,8 @@ namespace XNet
 {
     public abstract class Proto : IDisposable
     {
-        public short id;
+        public ushort id;
         
-
         public object pb;
 
         public abstract Type GetProtoType();

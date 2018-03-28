@@ -2,7 +2,7 @@
 #define  __gamesocket__
 
 
-#include <stdio.h>  
+#include "common.h"
 #include <winsock2.h>  
 #include "testpb.h"
 
@@ -19,6 +19,7 @@ public:
 
 	bool init();
 	void DO();
+	void process(ushort uid, char* pb,int len);
 
 private:
 	WORD sockVersion;
