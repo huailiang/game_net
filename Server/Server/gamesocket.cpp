@@ -1,5 +1,5 @@
 #include "gamesocket.h"
-
+#include "networkmgr.h"
 
 gamesocket::gamesocket()
 {
@@ -99,17 +99,5 @@ void gamesocket::DO()
 void gamesocket::process(ushort uid, char* pb,int len)
 {
 	cout << "uid is: " << uid << endl;
-
-	XNet::People person;
-
-	if (!person.ParseFromArray(pb, len))
-	{
-		printf("parse person error");
-	}
-	else
-	{
-		cout << "id: " << person.id() << endl;
-		cout << "name: " << person.name() << endl;
-		cout << "email:" << person.email() << endl;
-	}
+	networkmgr::Instance()->process(uid, pb, len);
 }

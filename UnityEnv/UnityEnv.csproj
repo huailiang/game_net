@@ -298,6 +298,7 @@
     <Compile Include="Assets\Scripts\example\TestSocket.cs" />
     <Compile Include="Assets\Scripts\messgae\PeopleMsg.cs" />
     <Compile Include="Assets\Scripts\messgae\Proto.cs" />
+    <Compile Include="Assets\Scripts\messgae\StudentMgr.cs" />
     <Compile Include="Assets\Scripts\netlib\XNetworkMgr.cs" />
     <Compile Include="Assets\Scripts\netlib\TcpClientHandler.cs" />
     <Compile Include="Assets\Scripts\netlib\UdpClientHandler.cs" />

@@ -1,7 +1,6 @@
 #ifndef  __gamesocket__
 #define  __gamesocket__
 
-
 #include "common.h"
 #include <winsock2.h>  
 #include "testpb.h"
@@ -10,6 +9,7 @@
 
 #define max_buff 1024
 #define len_head 2
+
 
 class gamesocket
 {

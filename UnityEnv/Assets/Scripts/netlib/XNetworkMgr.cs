@@ -36,14 +36,14 @@ namespace XNet
                 byte[] buff = new byte[pBuffer.Length + pId.Length];
                 pId.CopyTo(buff, 0);
                 pBuffer.CopyTo(buff, pId.Length);
-                Util.PrintBytes(pId);
+                //Util.PrintBytes(pId);
                 Send(buff);
             }
         }
 
         public void Send(byte[] buff)
         {
-            Util.PrintBytes(buff);
+            //Util.PrintBytes(buff);
             handle.Send(buff);
         }
 

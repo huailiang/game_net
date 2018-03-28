@@ -6,6 +6,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <vector>
+#include <unordered_map>
 
 typedef unsigned short ushort;
 typedef unsigned int  uint;

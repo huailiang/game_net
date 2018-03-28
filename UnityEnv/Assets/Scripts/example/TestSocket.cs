@@ -13,7 +13,7 @@ public class TestSocket : MonoBehaviour
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(20, 260, 100, 60), "Person-proto"))
+        if (GUI.Button(new Rect(20, 60, 100, 60), "Person-proto"))
         {
             People p = new People();
             p.name = "hugx";
@@ -21,6 +21,14 @@ public class TestSocket : MonoBehaviour
             p.email = "penghuailiang@126.com";
             p.snip.Add(2);
             XNetworkMgr.sington.Send(new PeopleMsg(p));
+        }
+        if (GUI.Button(new Rect(20, 160, 100, 60), "Student"))
+        {
+            Student s = new Student();
+            s.age = 12;
+            s.name = "hug";
+            s.num = 1002;
+            XNetworkMgr.sington.Send(new StudentMgr(s));
         }
     }
 
