@@ -16,12 +16,17 @@
 
 客户端采取的protobuf版本是:3.0.0 服务器对应的版本3.1.0
 
+
+<b>客户端</b>
+
 由于谷歌官方给的版本对.net要求比较高，而且需要jit功能(ios被苹果禁止)，所以我们找到了第三方编译的版本。
 
 关于unity protobuf的信息可以参考：https://github.com/google/protobuf/issues/644
 
 客户端版本来源：https://github.com/bitcraftCoLtd/protobuf3-for-unity
 
+
+<b>工具</b>
 
 tools目录：
 
@@ -30,6 +35,7 @@ tools目录：
 运行build_server.bat 会生成.h .cc文件， 并拷贝到Server目录
 
 
+<b>服务器</b>
 
 请将项目需要的.proto 全部定义在game.proto文件中，自动生成的代码全部保存在PBMessage.cs中
 
@@ -45,3 +51,17 @@ tools目录：
 
 运行效果如下图：
 <img src="tools/img/show.gif">
+
+<b>最后</b>
+
+我们在提供client_protobuff v3的同时，也提供了对2.0的支持，对应的分支是： client_protobuf_v2
+
+可以在终端上敲击下面命令，进入到
+
+```sh
+
+git clone https://github.com/huailiang/game_socket_protobuf.git
+
+git checkout client_protobuf_v2
+
+```
