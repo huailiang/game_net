@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEnv", "UnityEnv.csproj", "{9DC93EB1-813A-15D7-C840-08C83A31933C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEnv.Editor", "UnityEnv.Editor.csproj", "{0EF33D34-8BAC-14A0-182B-23422458CCF1}"

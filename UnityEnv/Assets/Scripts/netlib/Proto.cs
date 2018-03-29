@@ -1,29 +1,18 @@
 ﻿using System;
-using System.IO;
 
 namespace XNet
 {
     public abstract class Proto : IDisposable
     {
         public ushort id;
-        
+
         public object pb;
+        
+        public virtual void OnTimeout() { }
 
         public abstract Type GetProtoType();
 
-        public abstract void OnReply(object proto);
-
-        public virtual void OnTimeout() { }
-
-        public void OnProcess(byte[] pBuffer, int nSize)
-        {
-            using (MemoryStream ms = new MemoryStream(pBuffer, 0, nSize))
-            {
-                Type type= GetProtoType();
-                var proto = new PBMessageSerializer().Deserialize(ms, null, type);
-                OnReply(proto);
-            }
-        }
+        public abstract void OnProcess(byte[] pBuffer);
 
 
         public virtual void Dispose()

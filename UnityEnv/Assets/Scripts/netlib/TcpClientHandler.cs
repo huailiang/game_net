@@ -74,9 +74,9 @@ public class TcpClientHandler
                 byte[] head = new byte[len_head];
                 Array.Copy(recvData, 0, head, 0, len_head);
                 ushort uid = BitConverter.ToUInt16(head, 0);
-                byte[] buff = new byte[max_buff - len_head];
-                Array.Copy(recvData, len_head, buff, 0, buff.Length);
-                XNetworkMgr.sington.OnProcess(uid, buff, recvLen - len_head);
+                byte[] buff = new byte[recvLen - len_head];
+                Array.Copy(recvData, len_head, buff, 0, recvLen-len_head);
+                XNetworkMgr.sington.OnProcess(uid, buff);
                 recvLen = 0;
             }
         }

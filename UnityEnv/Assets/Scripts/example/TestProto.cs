@@ -2,6 +2,7 @@
 using System.IO;
 using XNet;
 using UnityEngine;
+using Google.Protobuf;
 
 public class TestProto : MonoBehaviour
 {
@@ -31,33 +32,33 @@ public class TestProto : MonoBehaviour
 
 	public void WriteProtoBuf()
 	{
-		People proto =new People();
-		proto.email = "rectvv@gmail.com";
-	    proto.id = 10086;
-	    proto.name = "Rect";
-        proto.snip.Add(2);
-        proto.snip.Add(4);
-	    // 序列化
-	    using (MemoryStream ms = new MemoryStream())
-	    {
-	        new PBMessageSerializer().Serialize(ms, proto);
-	        Byte[] pBuffer = ms.ToArray();
+        People proto = new People();
+        proto.Email = "rectvv@gmail.com";
+        proto.Id = 10086;
+        proto.Name = "Rect";
+        proto.Snip.Add(2);
+        proto.Snip.Add(4);
+        // 序列化
+        using (MemoryStream ms = new MemoryStream())
+        {
+            proto.WriteTo(ms);
+            Byte[] pBuffer = ms.ToArray();
             Util.PrintBytes(pBuffer);
-	        File.WriteAllBytes(basePath+"/data/data.bytes",pBuffer);
-	    }
-	}
+            File.WriteAllBytes(basePath + "/data/data.bytes", pBuffer);
+        }
+    }
 
 	public void ReadProtoBuf(Byte[] pBuffer,int nSize)
 	{
-	    if (null == pBuffer || 0 >= nSize)
-	    {
-	        return;
-	    }
-	    // 反序列化
-	    using (MemoryStream ms = new MemoryStream(pBuffer, 0, nSize))
-	    {
-	        People proto =  new PBMessageSerializer().Deserialize(ms, null, typeof(People)) as People;
-	        Debug.Log(proto.email+" snip cnt: "+proto.snip.Count);
-	    }
-	}
+        if (null == pBuffer || 0 >= nSize)
+        {
+            return;
+        }
+        // 反序列化
+        using (MemoryStream ms = new MemoryStream(pBuffer, 0, nSize))
+        {
+            People proto = People.Parser.ParseFrom(pBuffer);// new PBMessageSerializer().Deserialize(ms, null, typeof(People)) as People;
+            Debug.Log(proto.Email + " snip cnt: " + proto.Snip.Count);
+        }
+    }
 }

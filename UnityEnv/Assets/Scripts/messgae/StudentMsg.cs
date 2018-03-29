@@ -10,21 +10,22 @@ namespace XNet
         {
             id = 1002;
         }
-
-        public override void OnReply(object proto)
+        
+        public override void OnProcess(byte[] pBuffer)
         {
-            Student p = proto as Student;
-            Debug.Log("age:" + p.age + " num: " + p.num + " name: " + p.name);
-        }
-
-        public override void OnTimeout()
-        {
+            Student p = Student.Parser.ParseFrom(pBuffer);
+            Debug.Log("age:" + p.Age + " num: " + p.Num + " name: " + p.Name);
         }
 
         public override Type GetProtoType()
         {
             return typeof(Student);
         }
+
+        public override void OnTimeout()
+        {
+        }
+
     }
 
 }

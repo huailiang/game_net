@@ -14,20 +14,24 @@
 
 客户端是Unity, 采用c#语言，服务器端使用的是c++。
 
+客户端采取的protobuf版本是:3.0.0 服务器对应的版本3.1.0
+
+由于谷歌官方给的版本对.net要求比较高，而且需要jit功能(ios被苹果禁止)，所以我们找到了第三方编译的版本。
+
+关于unity protobuf的信息可以参考：https://github.com/google/protobuf/issues/644
+
+客户端版本来源：https://github.com/bitcraftCoLtd/protobuf3-for-unity
+
 
 tools目录：
 
-运行build.bat 会生成三个dll到Unity工程的Plugins目录下，三个dll分别对应：
+运行build.bat 会生成cs proto文件，并将拷贝到对应的unity目录中
 
-1. protobuf-net：protobuf核心工程，生成后的dll
-
-2. protogen：用于将标准的protobuf定义文件“ * .proto”转换成“ * .cs”文件，这样就免去了重新定义协议。
-
-3. precompile：用于生成protogen生成的文件所生成的dll所对应的序列化与反序列化dll。
-
-请将项目需要的.proto 全部定义在game.proto文件中，自动生成的代码全部保存在PBMessage/PBMessage.cs中。
+运行build_server.bat 会生成.h .cc文件， 并拷贝到Server目录
 
 
+
+请将项目需要的.proto 全部定义在game.proto文件中，自动生成的代码全部保存在PBMessage.cs中
 
 运行build—server.bat 会生成服务器端对应的代码。
 

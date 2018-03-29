@@ -38,6 +38,9 @@ void PeopleMsg::OnProcess(char* pb, int length)
 	p->set_name("Rect");
 	p->add_snip(2);
 	p->add_snip(4);
+	XNet::People_PhoneNumber* ph = p->add_phones();
+	ph->set_number("522-123");
+	ph->set_type(XNet::People_PhoneType_HOME);
 	set(p);
 	networkmgr::Instance()->send(this);
 }

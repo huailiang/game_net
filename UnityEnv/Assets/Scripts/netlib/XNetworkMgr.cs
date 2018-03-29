@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Google.Protobuf;
 using UnityEngine;
 
 namespace XNet
@@ -66,15 +67,18 @@ namespace XNet
             int hash = p.GetProtoType().GetHashCode();
             ty_mp.Add(hash, p);
             id_mp.Add(p.id, p);
+            Debug.Log("regist type: " + p.GetProtoType());
         }
 
-        public void Send(object obj)
+        public void Send(IMessage msg)
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                int hash = obj.GetType().GetHashCode();
+                Debug.Log("type: " +msg.GetType());
+                int hash = msg.GetType().GetHashCode();
                 ushort uid = ty_mp[hash].id;
-                new PBMessageSerializer().Serialize(ms, obj);
+
+                msg.WriteTo(ms);
                 byte[] pBuffer = ms.ToArray();
                 byte[] pId = BitConverter.GetBytes(uid);
                 byte[] buff = new byte[pBuffer.Length + pId.Length];
@@ -100,13 +104,13 @@ namespace XNet
         }
         
 
-        public void OnProcess(ushort uid, byte[] pb, int size)
+        public void OnProcess(ushort uid, byte[] pb)
         {
             if (id_mp.ContainsKey(uid))
             {
                 if (queue.Count > 0 && queue.Peek().uid == uid)
                 {
-                    id_mp[uid].OnProcess(pb, size);
+                    id_mp[uid].OnProcess(pb);
                     queue.Dequeue();
                 }
                 else

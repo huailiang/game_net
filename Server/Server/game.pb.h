@@ -26,6 +26,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
@@ -38,9 +39,130 @@ void protobuf_AssignDesc_game_2eproto();
 void protobuf_ShutdownFile_game_2eproto();
 
 class People;
+class People_PhoneNumber;
 class Student;
 
+enum People_PhoneType {
+  People_PhoneType_MOBILE = 0,
+  People_PhoneType_HOME = 1,
+  People_PhoneType_WORK = 2,
+  People_PhoneType_People_PhoneType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  People_PhoneType_People_PhoneType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool People_PhoneType_IsValid(int value);
+const People_PhoneType People_PhoneType_PhoneType_MIN = People_PhoneType_MOBILE;
+const People_PhoneType People_PhoneType_PhoneType_MAX = People_PhoneType_WORK;
+const int People_PhoneType_PhoneType_ARRAYSIZE = People_PhoneType_PhoneType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* People_PhoneType_descriptor();
+inline const ::std::string& People_PhoneType_Name(People_PhoneType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    People_PhoneType_descriptor(), value);
+}
+inline bool People_PhoneType_Parse(
+    const ::std::string& name, People_PhoneType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<People_PhoneType>(
+    People_PhoneType_descriptor(), name, value);
+}
 // ===================================================================
+
+class People_PhoneNumber : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:XNet.People.PhoneNumber) */ {
+ public:
+  People_PhoneNumber();
+  virtual ~People_PhoneNumber();
+
+  People_PhoneNumber(const People_PhoneNumber& from);
+
+  inline People_PhoneNumber& operator=(const People_PhoneNumber& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const People_PhoneNumber& default_instance();
+
+  static const People_PhoneNumber* internal_default_instance();
+
+  void Swap(People_PhoneNumber* other);
+
+  // implements Message ----------------------------------------------
+
+  inline People_PhoneNumber* New() const { return New(NULL); }
+
+  People_PhoneNumber* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const People_PhoneNumber& from);
+  void MergeFrom(const People_PhoneNumber& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  size_t ByteSizeLong() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(People_PhoneNumber* other);
+  void UnsafeMergeFrom(const People_PhoneNumber& from);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string number = 1;
+  void clear_number();
+  static const int kNumberFieldNumber = 1;
+  const ::std::string& number() const;
+  void set_number(const ::std::string& value);
+  void set_number(const char* value);
+  void set_number(const char* value, size_t size);
+  ::std::string* mutable_number();
+  ::std::string* release_number();
+  void set_allocated_number(::std::string* number);
+
+  // optional .XNet.People.PhoneType type = 2;
+  void clear_type();
+  static const int kTypeFieldNumber = 2;
+  ::XNet::People_PhoneType type() const;
+  void set_type(::XNet::People_PhoneType value);
+
+  // @@protoc_insertion_point(class_scope:XNet.People.PhoneNumber)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr number_;
+  int type_;
+  mutable int _cached_size_;
+  friend void  protobuf_InitDefaults_game_2eproto_impl();
+  friend void  protobuf_AddDesc_game_2eproto_impl();
+  friend void protobuf_AssignDesc_game_2eproto();
+  friend void protobuf_ShutdownFile_game_2eproto();
+
+  void InitAsDefaultInstance();
+};
+extern ::google::protobuf::internal::ExplicitlyConstructed<People_PhoneNumber> People_PhoneNumber_default_instance_;
+
+// -------------------------------------------------------------------
 
 class People : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:XNet.People) */ {
  public:
@@ -52,14 +174,6 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   inline People& operator=(const People& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -111,10 +225,39 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 
   // nested types ----------------------------------------------------
 
+  typedef People_PhoneNumber PhoneNumber;
+
+  typedef People_PhoneType PhoneType;
+  static const PhoneType MOBILE =
+    People_PhoneType_MOBILE;
+  static const PhoneType HOME =
+    People_PhoneType_HOME;
+  static const PhoneType WORK =
+    People_PhoneType_WORK;
+  static inline bool PhoneType_IsValid(int value) {
+    return People_PhoneType_IsValid(value);
+  }
+  static const PhoneType PhoneType_MIN =
+    People_PhoneType_PhoneType_MIN;
+  static const PhoneType PhoneType_MAX =
+    People_PhoneType_PhoneType_MAX;
+  static const int PhoneType_ARRAYSIZE =
+    People_PhoneType_PhoneType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  PhoneType_descriptor() {
+    return People_PhoneType_descriptor();
+  }
+  static inline const ::std::string& PhoneType_Name(PhoneType value) {
+    return People_PhoneType_Name(value);
+  }
+  static inline bool PhoneType_Parse(const ::std::string& name,
+      PhoneType* value) {
+    return People_PhoneType_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
-  // required string name = 1;
-  bool has_name() const;
+  // optional string name = 1;
   void clear_name();
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
@@ -125,15 +268,13 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
-  // required int32 id = 2;
-  bool has_id() const;
+  // optional int32 id = 2;
   void clear_id();
   static const int kIdFieldNumber = 2;
   ::google::protobuf::int32 id() const;
   void set_id(::google::protobuf::int32 value);
 
-  // required string email = 3;
-  bool has_email() const;
+  // optional string email = 3;
   void clear_email();
   static const int kEmailFieldNumber = 3;
   const ::std::string& email() const;
@@ -156,25 +297,29 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_snip();
 
+  // repeated .XNet.People.PhoneNumber phones = 5;
+  int phones_size() const;
+  void clear_phones();
+  static const int kPhonesFieldNumber = 5;
+  const ::XNet::People_PhoneNumber& phones(int index) const;
+  ::XNet::People_PhoneNumber* mutable_phones(int index);
+  ::XNet::People_PhoneNumber* add_phones();
+  ::google::protobuf::RepeatedPtrField< ::XNet::People_PhoneNumber >*
+      mutable_phones();
+  const ::google::protobuf::RepeatedPtrField< ::XNet::People_PhoneNumber >&
+      phones() const;
+
   // @@protoc_insertion_point(class_scope:XNet.People)
  private:
-  inline void set_has_name();
-  inline void clear_has_name();
-  inline void set_has_id();
-  inline void clear_has_id();
-  inline void set_has_email();
-  inline void clear_has_email();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > snip_;
+  mutable int _snip_cached_byte_size_;
+  ::google::protobuf::RepeatedPtrField< ::XNet::People_PhoneNumber > phones_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::internal::ArenaStringPtr email_;
   ::google::protobuf::int32 id_;
+  mutable int _cached_size_;
   friend void  protobuf_InitDefaults_game_2eproto_impl();
   friend void  protobuf_AddDesc_game_2eproto_impl();
   friend void protobuf_AssignDesc_game_2eproto();
@@ -196,14 +341,6 @@ class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   inline Student& operator=(const Student& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -257,8 +394,7 @@ class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // accessors -------------------------------------------------------
 
-  // required string name = 1;
-  bool has_name() const;
+  // optional string name = 1;
   void clear_name();
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
@@ -269,15 +405,13 @@ class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
-  // required int32 age = 2;
-  bool has_age() const;
+  // optional int32 age = 2;
   void clear_age();
   static const int kAgeFieldNumber = 2;
   ::google::protobuf::int32 age() const;
   void set_age(::google::protobuf::int32 value);
 
   // optional int32 num = 3;
-  bool has_num() const;
   void clear_num();
   static const int kNumFieldNumber = 3;
   ::google::protobuf::int32 num() const;
@@ -285,22 +419,12 @@ class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // @@protoc_insertion_point(class_scope:XNet.Student)
  private:
-  inline void set_has_name();
-  inline void clear_has_name();
-  inline void set_has_age();
-  inline void clear_has_age();
-  inline void set_has_num();
-  inline void clear_has_num();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::int32 age_;
   ::google::protobuf::int32 num_;
+  mutable int _cached_size_;
   friend void  protobuf_InitDefaults_game_2eproto_impl();
   friend void  protobuf_AddDesc_game_2eproto_impl();
   friend void protobuf_AssignDesc_game_2eproto();
@@ -316,135 +440,170 @@ extern ::google::protobuf::internal::ExplicitlyConstructed<Student> Student_defa
 // ===================================================================
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
+// People_PhoneNumber
+
+// optional string number = 1;
+inline void People_PhoneNumber::clear_number() {
+  number_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& People_PhoneNumber::number() const {
+  // @@protoc_insertion_point(field_get:XNet.People.PhoneNumber.number)
+  return number_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void People_PhoneNumber::set_number(const ::std::string& value) {
+  
+  number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:XNet.People.PhoneNumber.number)
+}
+inline void People_PhoneNumber::set_number(const char* value) {
+  
+  number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:XNet.People.PhoneNumber.number)
+}
+inline void People_PhoneNumber::set_number(const char* value, size_t size) {
+  
+  number_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:XNet.People.PhoneNumber.number)
+}
+inline ::std::string* People_PhoneNumber::mutable_number() {
+  
+  // @@protoc_insertion_point(field_mutable:XNet.People.PhoneNumber.number)
+  return number_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* People_PhoneNumber::release_number() {
+  // @@protoc_insertion_point(field_release:XNet.People.PhoneNumber.number)
+  
+  return number_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void People_PhoneNumber::set_allocated_number(::std::string* number) {
+  if (number != NULL) {
+    
+  } else {
+    
+  }
+  number_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), number);
+  // @@protoc_insertion_point(field_set_allocated:XNet.People.PhoneNumber.number)
+}
+
+// optional .XNet.People.PhoneType type = 2;
+inline void People_PhoneNumber::clear_type() {
+  type_ = 0;
+}
+inline ::XNet::People_PhoneType People_PhoneNumber::type() const {
+  // @@protoc_insertion_point(field_get:XNet.People.PhoneNumber.type)
+  return static_cast< ::XNet::People_PhoneType >(type_);
+}
+inline void People_PhoneNumber::set_type(::XNet::People_PhoneType value) {
+  
+  type_ = value;
+  // @@protoc_insertion_point(field_set:XNet.People.PhoneNumber.type)
+}
+
+inline const People_PhoneNumber* People_PhoneNumber::internal_default_instance() {
+  return &People_PhoneNumber_default_instance_.get();
+}
+// -------------------------------------------------------------------
+
 // People
 
-// required string name = 1;
-inline bool People::has_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void People::set_has_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void People::clear_has_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional string name = 1;
 inline void People::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_name();
 }
 inline const ::std::string& People::name() const {
   // @@protoc_insertion_point(field_get:XNet.People.name)
   return name_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void People::set_name(const ::std::string& value) {
-  set_has_name();
+  
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:XNet.People.name)
 }
 inline void People::set_name(const char* value) {
-  set_has_name();
+  
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:XNet.People.name)
 }
 inline void People::set_name(const char* value, size_t size) {
-  set_has_name();
+  
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:XNet.People.name)
 }
 inline ::std::string* People::mutable_name() {
-  set_has_name();
+  
   // @@protoc_insertion_point(field_mutable:XNet.People.name)
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* People::release_name() {
   // @@protoc_insertion_point(field_release:XNet.People.name)
-  clear_has_name();
+  
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void People::set_allocated_name(::std::string* name) {
   if (name != NULL) {
-    set_has_name();
+    
   } else {
-    clear_has_name();
+    
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
   // @@protoc_insertion_point(field_set_allocated:XNet.People.name)
 }
 
-// required int32 id = 2;
-inline bool People::has_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void People::set_has_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void People::clear_has_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional int32 id = 2;
 inline void People::clear_id() {
   id_ = 0;
-  clear_has_id();
 }
 inline ::google::protobuf::int32 People::id() const {
   // @@protoc_insertion_point(field_get:XNet.People.id)
   return id_;
 }
 inline void People::set_id(::google::protobuf::int32 value) {
-  set_has_id();
+  
   id_ = value;
   // @@protoc_insertion_point(field_set:XNet.People.id)
 }
 
-// required string email = 3;
-inline bool People::has_email() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void People::set_has_email() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void People::clear_has_email() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional string email = 3;
 inline void People::clear_email() {
   email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_email();
 }
 inline const ::std::string& People::email() const {
   // @@protoc_insertion_point(field_get:XNet.People.email)
   return email_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void People::set_email(const ::std::string& value) {
-  set_has_email();
+  
   email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:XNet.People.email)
 }
 inline void People::set_email(const char* value) {
-  set_has_email();
+  
   email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:XNet.People.email)
 }
 inline void People::set_email(const char* value, size_t size) {
-  set_has_email();
+  
   email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:XNet.People.email)
 }
 inline ::std::string* People::mutable_email() {
-  set_has_email();
+  
   // @@protoc_insertion_point(field_mutable:XNet.People.email)
   return email_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* People::release_email() {
   // @@protoc_insertion_point(field_release:XNet.People.email)
-  clear_has_email();
+  
   return email_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void People::set_allocated_email(::std::string* email) {
   if (email != NULL) {
-    set_has_email();
+    
   } else {
-    clear_has_email();
+    
   }
   email_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), email);
   // @@protoc_insertion_point(field_set_allocated:XNet.People.email)
@@ -480,6 +639,36 @@ People::mutable_snip() {
   return &snip_;
 }
 
+// repeated .XNet.People.PhoneNumber phones = 5;
+inline int People::phones_size() const {
+  return phones_.size();
+}
+inline void People::clear_phones() {
+  phones_.Clear();
+}
+inline const ::XNet::People_PhoneNumber& People::phones(int index) const {
+  // @@protoc_insertion_point(field_get:XNet.People.phones)
+  return phones_.Get(index);
+}
+inline ::XNet::People_PhoneNumber* People::mutable_phones(int index) {
+  // @@protoc_insertion_point(field_mutable:XNet.People.phones)
+  return phones_.Mutable(index);
+}
+inline ::XNet::People_PhoneNumber* People::add_phones() {
+  // @@protoc_insertion_point(field_add:XNet.People.phones)
+  return phones_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::XNet::People_PhoneNumber >*
+People::mutable_phones() {
+  // @@protoc_insertion_point(field_mutable_list:XNet.People.phones)
+  return &phones_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::XNet::People_PhoneNumber >&
+People::phones() const {
+  // @@protoc_insertion_point(field_list:XNet.People.phones)
+  return phones_;
+}
+
 inline const People* People::internal_default_instance() {
   return &People_default_instance_.get();
 }
@@ -487,104 +676,74 @@ inline const People* People::internal_default_instance() {
 
 // Student
 
-// required string name = 1;
-inline bool Student::has_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void Student::set_has_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void Student::clear_has_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional string name = 1;
 inline void Student::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_name();
 }
 inline const ::std::string& Student::name() const {
   // @@protoc_insertion_point(field_get:XNet.Student.name)
   return name_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void Student::set_name(const ::std::string& value) {
-  set_has_name();
+  
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:XNet.Student.name)
 }
 inline void Student::set_name(const char* value) {
-  set_has_name();
+  
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:XNet.Student.name)
 }
 inline void Student::set_name(const char* value, size_t size) {
-  set_has_name();
+  
   name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:XNet.Student.name)
 }
 inline ::std::string* Student::mutable_name() {
-  set_has_name();
+  
   // @@protoc_insertion_point(field_mutable:XNet.Student.name)
   return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Student::release_name() {
   // @@protoc_insertion_point(field_release:XNet.Student.name)
-  clear_has_name();
+  
   return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void Student::set_allocated_name(::std::string* name) {
   if (name != NULL) {
-    set_has_name();
+    
   } else {
-    clear_has_name();
+    
   }
   name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
   // @@protoc_insertion_point(field_set_allocated:XNet.Student.name)
 }
 
-// required int32 age = 2;
-inline bool Student::has_age() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Student::set_has_age() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Student::clear_has_age() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional int32 age = 2;
 inline void Student::clear_age() {
   age_ = 0;
-  clear_has_age();
 }
 inline ::google::protobuf::int32 Student::age() const {
   // @@protoc_insertion_point(field_get:XNet.Student.age)
   return age_;
 }
 inline void Student::set_age(::google::protobuf::int32 value) {
-  set_has_age();
+  
   age_ = value;
   // @@protoc_insertion_point(field_set:XNet.Student.age)
 }
 
 // optional int32 num = 3;
-inline bool Student::has_num() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void Student::set_has_num() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void Student::clear_has_num() {
-  _has_bits_[0] &= ~0x00000004u;
-}
 inline void Student::clear_num() {
   num_ = 0;
-  clear_has_num();
 }
 inline ::google::protobuf::int32 Student::num() const {
   // @@protoc_insertion_point(field_get:XNet.Student.num)
   return num_;
 }
 inline void Student::set_num(::google::protobuf::int32 value) {
-  set_has_num();
+  
   num_ = value;
   // @@protoc_insertion_point(field_set:XNet.Student.num)
 }
@@ -595,10 +754,26 @@ inline const Student* Student::internal_default_instance() {
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace XNet
+
+#ifndef SWIG
+namespace google {
+namespace protobuf {
+
+template <> struct is_proto_enum< ::XNet::People_PhoneType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::XNet::People_PhoneType>() {
+  return ::XNet::People_PhoneType_descriptor();
+}
+
+}  // namespace protobuf
+}  // namespace google
+#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 
