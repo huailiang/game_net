@@ -10,7 +10,6 @@
    	</a>
 </p>
 
-在tools/ProtobufTool/目录中：
 
 客户端是Unity, 采用c#语言，服务器端使用的是c++。
 
@@ -29,6 +28,8 @@
 <b>工具</b>
 
 tools目录：
+
+在tools/ProtobufTool/目录中：
 
 运行build.bat 会生成cs proto文件，并将拷贝到对应的unity目录中
 
@@ -52,9 +53,10 @@ tools目录：
 运行效果如下图：
 <img src="tools/img/show.gif">
 
+
 <b>最后</b>
 
-我们在提供client_protobuff v3的同时，也提供了对2.0的支持，对应的分支是： client_protobuf_v2
+我们在提供unity使用protobuff v3.0的同时，也提供了对protobuff v2.0的支持，对应的分支是： client_protobuf_v2
 
 可以在终端上敲击下面命令，进入到
 
