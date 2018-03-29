@@ -27,7 +27,7 @@ tools目录：
 
 请将项目需要的.proto 全部定义在game.proto文件中，自动生成的代码全部保存在PBMessage/PBMessage.cs中。
 
-
+注意：客户端采用的proto版本是v2.x 和服务器不是对应的。
 
 运行build—server.bat 会生成服务器端对应的代码。
 
