@@ -26,8 +26,6 @@ namespace XNet
         private Dictionary<ushort, Proto> id_mp;
         private Dictionary<int, Proto> ty_mp;
 
-        private float timeout = 2f;
-        private Queue<NetSerial> queue = new Queue<NetSerial>();
 
         public void Init()
         {
@@ -41,16 +39,6 @@ namespace XNet
 
         public void Update()
         {
-            while (queue.Count > 0)
-            {
-                NetSerial ser = queue.Peek();
-                if (Time.time - ser.time >= timeout)
-                {
-                    Proto proto = id_mp[ser.uid];
-                    proto.OnTimeout();
-                    queue.Dequeue();
-                }
-            }
         }
 
         public void Regist()
@@ -84,7 +72,6 @@ namespace XNet
                 byte[] buff = new byte[pBuffer.Length + pId.Length];
                 pId.CopyTo(buff, 0);
                 pBuffer.CopyTo(buff, pId.Length);
-                queue.Enqueue(new NetSerial() { time = Time.time, uid = uid });
                 Send(buff);
             }
         }
@@ -103,20 +90,17 @@ namespace XNet
             }
         }
         
-
+        /// <summary>
+        /// 这里是子线程调用 不能在方法里处理Unity API
+        /// </summary>
+        /// <param name="uid">消息id</param>
+        /// <param name="pb">网络buff</param>
         public void OnProcess(ushort uid, byte[] pb)
         {
+            Debug.Log("rcv pb with uid: " + uid);
             if (id_mp.ContainsKey(uid))
             {
-                if (queue.Count > 0 && queue.Peek().uid == uid)
-                {
-                    id_mp[uid].OnProcess(pb);
-                    queue.Dequeue();
-                }
-                else
-                {
-                    Debug.Log("may be proto timeout!");
-                }
+                id_mp[uid].OnProcess(pb);
             }
             else
             {
