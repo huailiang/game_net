@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Google.Protobuf;
@@ -27,10 +28,10 @@ namespace XNet
         private Dictionary<int, Proto> ty_mp;
 
 
-        public void Init()
+        public void Init(out IEnumerator rcv)
         {
             handle = new TcpClientHandler();
-            handle.InitSocket();
+            handle.InitSocket(out rcv);
             id_mp = new Dictionary<ushort, Proto>();
             ty_mp = new Dictionary<int, Proto>();
 

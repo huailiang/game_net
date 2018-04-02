@@ -6,9 +6,12 @@ public class TestSocket : MonoBehaviour
 {
     void Start()
     {
-        XNetworkMgr.sington.Init();
+        IEnumerator itor;
+        XNetworkMgr.sington.Init(out itor);
+        StartCoroutine(itor);
     }
     
+
 
     private void OnGUI()
     {
