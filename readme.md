@@ -67,3 +67,27 @@ git clone https://github.com/huailiang/game_socket_protobuf.git
 git checkout client_protobuf_v2
 
 ```
+
+其他分支：
+
+ierator_rcv：接收的消息的时候在协程里处理，这样就不会卡住主线程，处理回调的时候也不用考虑回调里使用unity api的问题
+
+```bash
+git checkout ierator_rcv
+
+```
+
+asyn_recv: 使用Socket自带的api异步方法： BeginReceive和EndReceive 这两个是对偶出现的。 c#内部实现是基于线程池（thread pool)的，所以不能直接再receive回调里使用unity api
+
+```bash
+git checkout asyn_recv
+
+```
+
+
+mutthread: 手动开启一个线程用来接收socket消息，不能直接再receive回调里使用unity api
+
+```bash
+git checkout mutthread
+
+```
