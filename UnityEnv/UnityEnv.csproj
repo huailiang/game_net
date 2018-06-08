@@ -13,12 +13,14 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -254,11 +256,17 @@
     <Reference Include="UnityEditor.Graphs">
       <HintPath>D:/install/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Android.Extensions">
+      <HintPath>D:/install/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions">
+      <HintPath>D:/install/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>D:/install/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Protobuf">
-      <HintPath>Assets/Plugins/Google.Protobuf.dll</HintPath>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/user/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
@@ -281,8 +289,11 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/user/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>D:/install/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>D:/install/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -295,10 +306,77 @@
     <Compile Include="Assets\Scripts\netlib\TcpClientHandler.cs" />
     <Compile Include="Assets\Scripts\netlib\UdpClientHandler.cs" />
     <Compile Include="Assets\Scripts\netlib\XNetworkMgr.cs" />
+    <Compile Include="Assets\Scripts\protobuf\ByteArray.cs" />
+    <Compile Include="Assets\Scripts\protobuf\ByteString.cs" />
+    <Compile Include="Assets\Scripts\protobuf\CodedInputStream.cs" />
+    <Compile Include="Assets\Scripts\protobuf\CodedOutputStream.ComputeSize.cs" />
+    <Compile Include="Assets\Scripts\protobuf\CodedOutputStream.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Collections\MapField.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Collections\ReadOnlyDictionary.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Collections\RepeatedField.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Compatibility\PropertyInfoExtensions.cs" />
+    <Compile Include="Assets\Scripts\protobuf\FieldCodec.cs" />
+    <Compile Include="Assets\Scripts\protobuf\FrameworkPortability.cs" />
+    <Compile Include="Assets\Scripts\protobuf\ICustomDiagnosticMessage.cs" />
+    <Compile Include="Assets\Scripts\protobuf\IDeepCloneable.cs" />
+    <Compile Include="Assets\Scripts\protobuf\IMessage.cs" />
+    <Compile Include="Assets\Scripts\protobuf\InvalidJsonException.cs" />
+    <Compile Include="Assets\Scripts\protobuf\InvalidProtocolBufferException.cs" />
+    <Compile Include="Assets\Scripts\protobuf\JsonFormatter.cs" />
+    <Compile Include="Assets\Scripts\protobuf\JsonParser.cs" />
+    <Compile Include="Assets\Scripts\protobuf\JsonToken.cs" />
+    <Compile Include="Assets\Scripts\protobuf\JsonTokenizer.cs" />
+    <Compile Include="Assets\Scripts\protobuf\LimitedInputStream.cs" />
+    <Compile Include="Assets\Scripts\protobuf\MessageExtensions.cs" />
+    <Compile Include="Assets\Scripts\protobuf\MessageParser.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Properties\AssemblyInfo.cs" />
+    <Compile Include="Assets\Scripts\protobuf\ProtoPreconditions.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\Descriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\DescriptorBase.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\DescriptorPool.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\DescriptorUtil.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\DescriptorValidationException.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\EnumDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\EnumValueDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\FieldAccessorBase.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\FieldDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\FieldType.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\FileDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\GeneratedClrTypeInfo.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\IDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\IFieldAccessor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\MapFieldAccessor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\MessageDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\MethodDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\OneofAccessor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\OneofDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\OriginalNameAttribute.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\PackageDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\PartialClasses.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\ReflectionUtil.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\RepeatedFieldAccessor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\ServiceDescriptor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\SingleFieldAccessor.cs" />
+    <Compile Include="Assets\Scripts\protobuf\Reflection\TypeRegistry.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\Any.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\AnyPartial.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\Api.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\Duration.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\DurationPartial.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\Empty.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\FieldMask.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\FieldMaskPartial.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\SourceContext.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\Struct.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\TimeExtensions.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\Timestamp.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\TimestampPartial.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\Type.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\ValuePartial.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\Wrappers.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WellKnownTypes\WrappersPartial.cs" />
+    <Compile Include="Assets\Scripts\protobuf\WireFormat.cs" />
     <Compile Include="Assets\Scripts\util\Util.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\Plugins\Google.Protobuf.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

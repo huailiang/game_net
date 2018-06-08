@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>See project site for more info.</Description>
+    <Copyright>Copyright 2015, Google Inc.</Copyright>
+    <AssemblyTitle>Google Protocol Buffers</AssemblyTitle>
+    <VersionPrefix>3.0.0</VersionPrefix>
+    <Authors>Google Inc.</Authors>
+    <TargetFrameworks>net45;net35;netstandard1.0</TargetFrameworks>
+    <DebugType>portable</DebugType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>Google.Protobuf</AssemblyName>
+    <AssemblyOriginatorKeyFile>../../keys/Google.Protobuf.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <PackageId>Google.Protobuf</PackageId>
+    <PackageTags>Protocol;Buffers;Binary;Serialization;Format;Google;proto;proto3</PackageTags>
+    <PackageReleaseNotes>C# proto3 support</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/google/protobuf</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/google/protobuf/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/nodatime/nodatime.git</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net35' ">
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net35' ">
+    <DefineConstants>$(DefineConstants);DOTNET35</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
+    <PackageReference Include="System.Collections" Version="4.0.11" />
+    <PackageReference Include="System.Diagnostics.Debug" Version="4.0.11" />
+    <PackageReference Include="System.Globalization" Version="4.0.11" />
+    <PackageReference Include="System.IO" Version="4.1.0" />
+    <PackageReference Include="System.Linq" Version="4.1.0" />
+    <PackageReference Include="System.Linq.Expressions" Version="4.1.0" />
+    <PackageReference Include="System.ObjectModel" Version="4.0.12" />
+    <PackageReference Include="System.Reflection" Version="4.1.0" />
+    <PackageReference Include="System.Reflection.Extensions" Version="4.0.1" />
+    <PackageReference Include="System.Runtime" Version="4.1.0" />
+    <PackageReference Include="System.Runtime.Extensions" Version="4.1.0" />
+    <PackageReference Include="System.Text.Encoding" Version="4.0.11" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.1.0" />
+    <PackageReference Include="System.Threading" Version="4.0.11" />
+  </ItemGroup>
+
+</Project>

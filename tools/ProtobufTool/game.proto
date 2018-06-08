@@ -26,3 +26,8 @@ message Student{
   	int32 age = 2;  
   	int32 num = 3;
 }
+
+message Test{
+    int32 index = 1;  
+    int32 age = 2;
+}

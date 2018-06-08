@@ -28,12 +28,14 @@ namespace XNet {
             "TnVtYmVyEg4KBm51bWJlchgBIAEoCRIkCgR0eXBlGAIgASgOMhYuWE5ldC5Q",
             "ZW9wbGUuUGhvbmVUeXBlIisKCVBob25lVHlwZRIKCgZNT0JJTEUQABIICgRI",
             "T01FEAESCAoEV09SSxACIjEKB1N0dWRlbnQSDAoEbmFtZRgBIAEoCRILCgNh",
-            "Z2UYAiABKAUSCwoDbnVtGAMgASgFYgZwcm90bzM="));
+            "Z2UYAiABKAUSCwoDbnVtGAMgASgFIiIKBFRlc3QSDQoFaW5kZXgYASABKAUS",
+            "CwoDYWdlGAIgASgFYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::XNet.People), global::XNet.People.Parser, new[]{ "Name", "Id", "Email", "Snip", "Phones" }, null, new[]{ typeof(global::XNet.People.Types.PhoneType) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::XNet.People.Types.PhoneNumber), global::XNet.People.Types.PhoneNumber.Parser, new[]{ "Number", "Type" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::XNet.Student), global::XNet.Student.Parser, new[]{ "Name", "Age", "Num" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::XNet.Student), global::XNet.Student.Parser, new[]{ "Name", "Age", "Num" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::XNet.Test), global::XNet.Test.Parser, new[]{ "Index", "Age" }, null, null, null)
           }));
     }
     #endregion
@@ -577,6 +579,151 @@ namespace XNet {
           }
           case 24: {
             Num = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Test : pb::IMessage<Test> {
+    private static readonly pb::MessageParser<Test> _parser = new pb::MessageParser<Test>(() => new Test());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Test> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::XNet.GameReflection.Descriptor.MessageTypes[2]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Test() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Test(Test other) : this() {
+      index_ = other.index_;
+      age_ = other.age_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Test Clone() {
+      return new Test(this);
+    }
+
+    /// <summary>Field number for the "index" field.</summary>
+    public const int IndexFieldNumber = 1;
+    private int index_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Index {
+      get { return index_; }
+      set {
+        index_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "age" field.</summary>
+    public const int AgeFieldNumber = 2;
+    private int age_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Age {
+      get { return age_; }
+      set {
+        age_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Test);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Test other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Index != other.Index) return false;
+      if (Age != other.Age) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Index != 0) hash ^= Index.GetHashCode();
+      if (Age != 0) hash ^= Age.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Index != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Index);
+      }
+      if (Age != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Age);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Index != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Index);
+      }
+      if (Age != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Age);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Test other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Index != 0) {
+        Index = other.Index;
+      }
+      if (other.Age != 0) {
+        Age = other.Age;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Index = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Age = input.ReadInt32();
             break;
           }
         }
