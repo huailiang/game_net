@@ -25,6 +25,23 @@
 客户端版本来源：https://github.com/bitcraftCoLtd/protobuf3-for-unity
 
 
+通过修改上面的源码，在这里我们优化消除了protobuf在序列化和反序列化时候产生gc的状况。原生的代码使用了大量的.net4和.net6的语法， 我们也直接修改成net3以下 unity直接支持的语法。
+
+之前的产生gc
+
+<img src="tools/img/gc.gif">
+
+修改之后消除gc：
+
+<img src="tools/img/gc_no.gif">
+
+优化操作：
+
+在优化的时候，为了避免反序列化产生的实例（new），我们在每一个proto Message对应的类中加了一个共享的对象，这个对象只会new 一次，下次使用的时候直接改对象里的成员值，而不是直接new一个对象。
+
+还有就是重写了CodeInputStream里的代码，内存中也是只会存在一个共享的CodeInputStream, 而不是每次都根据bytes[]或者stream来new一个新对象。
+
+
 <b>工具</b>
 
 tools目录：
