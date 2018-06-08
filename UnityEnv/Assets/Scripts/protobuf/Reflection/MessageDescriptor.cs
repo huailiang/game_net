@@ -34,10 +34,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-#if DOTNET35
-// Needed for ReadOnlyDictionary, which does not exist in .NET 3.5
 using Google.Protobuf.Collections;
-#endif
 
 namespace Google.Protobuf.Reflection
 {
@@ -104,7 +101,7 @@ namespace Google.Protobuf.Reflection
             Fields = new FieldCollection(this);
         }
 
-        private static Dictionary<string, FieldDescriptor> CreateJsonFieldMap(IList<FieldDescriptor> fields)
+        private static ReadOnlyDictionary<string, FieldDescriptor> CreateJsonFieldMap(IList<FieldDescriptor> fields)
         {
             var map = new Dictionary<string, FieldDescriptor>();
             foreach (var field in fields)
@@ -112,7 +109,7 @@ namespace Google.Protobuf.Reflection
                 map[field.Name] = field;
                 map[field.JsonName] = field;
             }
-            return new Dictionary<string, FieldDescriptor>(map);
+            return new ReadOnlyDictionary<string, FieldDescriptor>(map);
         }
 
         /// <summary>

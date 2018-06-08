@@ -7,7 +7,6 @@ using Google.Protobuf;
 public class TestProto : MonoBehaviour
 {
     private string basePath;
-    private ByteString gcBuff;
     private CodedInputStream iStream;
 
     void Start()
@@ -15,8 +14,7 @@ public class TestProto : MonoBehaviour
         basePath = Path.GetDirectoryName(Application.dataPath);
         Debug.Log("Start: " + basePath);
     }
-
-
+    
     private void OnGUI()
     {
         if (GUI.Button(new Rect(20, 20, 100, 60), "Save"))
@@ -31,18 +29,15 @@ public class TestProto : MonoBehaviour
         }
         if (GUI.Button(new Rect(20, 260, 100, 60), "GC"))
         {
-            if (gcBuff == null)
-            {
                 var bytes = File.ReadAllBytes(basePath + "/data/test.bytes");
                 iStream = new CodedInputStream(bytes);
                 //gcBuff = ByteString.CopyFrom(bytes);
-            }
         }
     }
 
     private void Update()
     {
-        if (gcBuff != null)
+        if (iStream != null)
         {
            Test.Parser.ParseFrom(iStream);
         }

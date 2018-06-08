@@ -30,7 +30,6 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using Google.Protobuf.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -121,16 +120,13 @@ namespace Google.Protobuf
         /// <summary>
         /// Creates a new CodedInputStream reading data from the given byte array.
         /// </summary>
-        public CodedInputStream(byte[] buffer) : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), 0, buffer.Length)
-        {            
-        }
+        public CodedInputStream(byte[] buffer) : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), 0, buffer.Length) { }
 
         /// <summary>
         /// Creates a new <see cref="CodedInputStream"/> that reads from the given byte array slice.
         /// </summary>
-        public CodedInputStream(byte[] buffer, int offset, int length)
-            : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), offset, offset + length)
-        {            
+        public CodedInputStream(byte[] buffer, int offset, int length) : this(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), offset, offset + length)
+        {
             if (offset < 0 || offset > buffer.Length)
             {
                 throw new ArgumentOutOfRangeException("offset", "Offset must be within the buffer");
@@ -146,9 +142,7 @@ namespace Google.Protobuf
         /// when the returned object is disposed.
         /// </summary>
         /// <param name="input">The stream to read from.</param>
-        public CodedInputStream(Stream input) : this(input, false)
-        {
-        }
+        public CodedInputStream(Stream input) : this(input, false) { }
 
         /// <summary>
         /// Creates a new <see cref="CodedInputStream"/> reading data from the given stream.
@@ -157,8 +151,7 @@ namespace Google.Protobuf
         /// <param name="leaveOpen"><c>true</c> to leave <paramref name="input"/> open when the returned
         /// <c cref="CodedInputStream"/> is disposed; <c>false</c> to dispose of the given stream when the
         /// returned object is disposed.</param>
-        public CodedInputStream(Stream input, bool leaveOpen)
-            : this(ProtoPreconditions.CheckNotNull(input, "input"), new byte[BufferSize], 0, 0)
+        public CodedInputStream(Stream input, bool leaveOpen): this(ProtoPreconditions.CheckNotNull(input, "input"), new byte[BufferSize], 0, 0)
         {
             this.leaveOpen = leaveOpen;
         }
