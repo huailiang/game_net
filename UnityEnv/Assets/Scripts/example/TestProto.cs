@@ -7,7 +7,8 @@ using Google.Protobuf;
 public class TestProto : MonoBehaviour
 {
     private string basePath;
-    private CodedInputStream iStream;
+    private CodedInputStream sharedStream;
+    private bool parse = false;
 
     void Start()
     {
@@ -17,29 +18,53 @@ public class TestProto : MonoBehaviour
     
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(20, 20, 100, 60), "Save"))
+        if (GUI.Button(new Rect(20, 20, 100, 60), "SavePeople"))
         {
             WritePeopleBuf();
-            //WriteTestBuf();
         }
-        if (GUI.Button(new Rect(20, 140, 100, 60), "Load"))
+        if (GUI.Button(new Rect(140, 20, 100, 60), "SaveTest"))
+        {
+            WriteTestBuf();
+        }
+        if (GUI.Button(new Rect(20, 140, 100, 60), "LoadPeople"))
         {
             Byte[] bytes = File.ReadAllBytes(basePath + "/data/people.bytes");
-            ReadProtoBuf(bytes, bytes.Length);
+            FillInputStream(bytes);
+            People proto = People.Parser.ParseFrom(sharedStream);
+            Debug.Log(proto.Email + " snip cnt: " + proto.Snip.Count);
+        }
+        if (GUI.Button(new Rect(140, 140, 100, 60), "LoadTest"))
+        {
+            Byte[] bytes = File.ReadAllBytes(basePath + "/data/test.bytes");
+            FillInputStream(bytes);
+            Test proto = Test.Parser.ParseFrom(sharedStream);
+            Debug.Log(proto.Index + " snip cnt: " + proto.Age);
         }
         if (GUI.Button(new Rect(20, 260, 100, 60), "GC"))
         {
-                var bytes = File.ReadAllBytes(basePath + "/data/test.bytes");
-                iStream = new CodedInputStream(bytes);
-                //gcBuff = ByteString.CopyFrom(bytes);
+            var bytes = File.ReadAllBytes(basePath + "/data/test.bytes");
+            FillInputStream(bytes);
+            parse = true;
         }
     }
 
     private void Update()
     {
-        if (iStream != null)
+        if (parse)
         {
-           Test.Parser.ParseFrom(iStream);
+            Test.Parser.ParseFrom(sharedStream);
+        }
+    }
+
+    private void FillInputStream(byte[] bytes)
+    {
+        if (sharedStream == null)
+        {
+            sharedStream = new CodedInputStream(bytes);
+        }
+        else
+        {
+            sharedStream.Set(bytes);
         }
     }
 

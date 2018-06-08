@@ -160,8 +160,8 @@ namespace Google.Protobuf
         // The current implementation avoids a virtual method call and a cast, which *may* be significant in some cases.
         // Benchmarking work is required to measure the significance - but it's only a few lines of code in any case.
         // The API wouldn't change anyway - just the implementation - so this work can be deferred.
-        private readonly Func<T> factory; 
-
+        private readonly Func<T> factory;
+        T message;
         /// <summary>
         /// Creates a new parser.
         /// </summary>
@@ -192,7 +192,7 @@ namespace Google.Protobuf
         public new T ParseFrom(byte[] data)
         {
             ProtoPreconditions.CheckNotNull(data, "data");
-            T message = factory();
+            if (message == null) message = factory();
             message.MergeFrom(data);
             return message;
         }
@@ -205,7 +205,7 @@ namespace Google.Protobuf
         public new T ParseFrom(ByteString data)
         {
             ProtoPreconditions.CheckNotNull(data, "data");
-            T message = factory();
+            if (message == null) message = factory();
             message.MergeFrom(data);
             return message;
         }
@@ -217,7 +217,7 @@ namespace Google.Protobuf
         /// <returns>The parsed message.</returns>
         public new T ParseFrom(Stream input)
         {
-            T message = factory();
+            if (message == null) message = factory();
             message.MergeFrom(input);
             return message;
         }
@@ -233,7 +233,7 @@ namespace Google.Protobuf
         /// <returns>The parsed message.</returns>
         public new T ParseDelimitedFrom(Stream input)
         {
-            T message = factory();
+            if (message == null) message = factory();
             message.MergeDelimitedFrom(input);
             return message;
         }
@@ -245,7 +245,7 @@ namespace Google.Protobuf
         /// <returns>The parsed message.</returns>
         public new T ParseFrom(CodedInputStream input)
         {
-            T message = factory();
+            if (message == null) message = factory();
             message.MergeFrom(input);
             return message;
         }
@@ -259,7 +259,7 @@ namespace Google.Protobuf
         /// <exception cref="InvalidProtocolBufferException">The JSON does not represent a Protocol Buffers message correctly</exception>
         public new T ParseJson(string json)
         {
-            T message = factory();
+            if (message == null) message = factory();
             JsonParser.Default.Merge(message, json);
             return message;
         }
