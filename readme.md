@@ -29,11 +29,11 @@
 
 之前的产生gc
 
-<img src="tools/img/gc.gif">
+<img src="tools/img/gc.jpg">
 
 修改之后消除gc：
 
-<img src="tools/img/gc_no.gif">
+<img src="tools/img/gc_no.jpg">
 
 优化操作：
 
