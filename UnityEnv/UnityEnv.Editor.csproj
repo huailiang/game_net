@@ -287,6 +287,9 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/user/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="protobuf-lib">
+      <HintPath>Assets/lib/protobuf-lib.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:/install/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>

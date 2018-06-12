@@ -287,6 +287,9 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/user/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="protobuf-lib">
+      <HintPath>Assets/lib/protobuf-lib.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:/install/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
@@ -304,83 +307,6 @@
     <Compile Include="Assets\Scripts\netlib\TcpClientHandler.cs" />
     <Compile Include="Assets\Scripts\netlib\UdpClientHandler.cs" />
     <Compile Include="Assets\Scripts\netlib\XNetworkMgr.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\ByteArray.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\ByteString.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\CodedInputStream.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\CodedOutputStream.ComputeSize.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\CodedOutputStream.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Collections\Lists.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Collections\MapField.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Collections\ProtobufEqualityComparers.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Collections\ReadOnlyDictionary.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Collections\RepeatedField.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Compatibility\MethodInfoExtensions.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Compatibility\PropertyInfoExtensions.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Compatibility\StreamExtensions.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\FieldCodec.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\FrameworkPortability.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\ICustomDiagnosticMessage.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\IDeepCloneable.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\IMessage.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\InvalidJsonException.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\InvalidProtocolBufferException.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\JsonFormatter.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\JsonParser.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\JsonToken.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\JsonTokenizer.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\LimitedInputStream.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\MessageExtensions.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\MessageParser.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Properties\AssemblyInfo.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\ProtoPreconditions.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\CustomOptions.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\Descriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\DescriptorBase.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\DescriptorPool.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\DescriptorUtil.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\DescriptorValidationException.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\EnumDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\EnumValueDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\FieldAccessorBase.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\FieldDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\FieldType.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\FileDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\GeneratedClrTypeInfo.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\IDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\IFieldAccessor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\MapFieldAccessor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\MessageDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\MethodDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\OneofAccessor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\OneofDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\OriginalNameAttribute.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\PackageDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\PartialClasses.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\ReflectionUtil.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\RepeatedFieldAccessor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\ServiceDescriptor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\SingleFieldAccessor.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\Reflection\TypeRegistry.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\UnknownField.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\UnknownFieldSet.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\Any.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\AnyPartial.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\Api.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\Duration.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\DurationPartial.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\Empty.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\FieldMask.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\FieldMaskPartial.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\SourceContext.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\Struct.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\TimeExtensions.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\Timestamp.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\TimestampPartial.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\Type.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\ValuePartial.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\Wrappers.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WellKnownTypes\WrappersPartial.cs" />
-    <Compile Include="Assets\Scripts\protobuf-3.6.x\WireFormat.cs" />
     <Compile Include="Assets\Scripts\util\Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
