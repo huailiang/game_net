@@ -15,7 +15,7 @@ public class TestProto : MonoBehaviour
         basePath = Path.GetDirectoryName(Application.dataPath);
         Debug.Log("Start: " + basePath);
     }
-    
+
     private void OnGUI()
     {
         if (GUI.Button(new Rect(20, 20, 100, 60), "SavePeople"))
@@ -38,7 +38,7 @@ public class TestProto : MonoBehaviour
             Byte[] bytes = File.ReadAllBytes(basePath + "/data/test.bytes");
             FillInputStream(bytes);
             Test proto = Test.Parser.ParseFrom(sharedStream);
-            Debug.Log(proto.Index + " snip cnt: " + proto.Age);
+            Debug.Log("index: " + proto.Index + " age: " + proto.Age);
         }
         if (GUI.Button(new Rect(20, 260, 100, 60), "GC"))
         {
@@ -68,12 +68,12 @@ public class TestProto : MonoBehaviour
         }
     }
 
-    
+
     private void WriteTestBuf()
     {
         Test proto = new Test();
-        proto.Index = UnityEngine.Random.Range(100000, 2000000);
-        proto.Age = UnityEngine.Random.Range(20, 100);
+        proto.Index = 1024;
+        proto.Age = 64;
         using (MemoryStream ms = new MemoryStream())
         {
             proto.WriteTo(ms);
@@ -100,20 +100,6 @@ public class TestProto : MonoBehaviour
             Util.PrintBytes(pBuffer);
             File.WriteAllBytes(basePath + "/data/people.bytes", pBuffer);
             ms.SetLength(0);
-        }
-    }
-
-    public void ReadProtoBuf(Byte[] pBuffer, int nSize)
-    {
-        if (null == pBuffer || 0 >= nSize)
-        {
-            return;
-        }
-        // 反序列化
-        using (MemoryStream ms = new MemoryStream(pBuffer, 0, nSize))
-        {
-            People proto = People.Parser.ParseFrom(pBuffer);
-            Debug.Log(proto.Email + " snip cnt: " + proto.Snip.Count);
         }
     }
 
