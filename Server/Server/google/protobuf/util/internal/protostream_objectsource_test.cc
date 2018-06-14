@@ -101,7 +101,10 @@ class ProtostreamObjectSourceTest
       : helper_(GetParam()),
         mock_(),
         ow_(&mock_),
-        use_lower_camel_for_enums_(false) {
+        use_lower_camel_for_enums_(false),
+        use_ints_for_enums_(false),
+        add_trailing_zeros_(false),
+        render_unknown_enum_values_(true) {
     helper_.ResetTypeInfo(Book::descriptor(), Proto3Message::descriptor());
   }
 
@@ -109,11 +112,11 @@ class ProtostreamObjectSourceTest
 
   void DoTest(const Message& msg, const Descriptor* descriptor) {
     Status status = ExecuteTest(msg, descriptor);
-    EXPECT_EQ(Status::OK, status);
+    EXPECT_EQ(util::Status(), status);
   }
 
   Status ExecuteTest(const Message& msg, const Descriptor* descriptor) {
-    ostringstream oss;
+    std::ostringstream oss;
     msg.SerializePartialToOstream(&oss);
     string proto = oss.str();
     ArrayInputStream arr_stream(proto.data(), proto.size());
@@ -122,6 +125,7 @@ class ProtostreamObjectSourceTest
     google::protobuf::scoped_ptr<ProtoStreamObjectSource> os(
         helper_.NewProtoSource(&in_stream, GetTypeUrl(descriptor)));
     if (use_lower_camel_for_enums_) os->set_use_lower_camel_for_enums(true);
+    if (use_ints_for_enums_) os->set_use_ints_for_enums(true);
     os->set_max_recursion_depth(64);
     return os->WriteTo(&mock_);
   }
@@ -269,11 +273,22 @@ class ProtostreamObjectSourceTest
 
   void UseLowerCamelForEnums() { use_lower_camel_for_enums_ = true; }
 
+  void UseIntsForEnums() { use_ints_for_enums_ = true; }
+
+  void AddTrailingZeros() { add_trailing_zeros_ = true; }
+
+  void SetRenderUnknownEnumValues(bool value) {
+    render_unknown_enum_values_ = value;
+  }
+
   testing::TypeInfoTestHelper helper_;
 
   ::testing::NiceMock<MockObjectWriter> mock_;
   ExpectingObjectWriter ow_;
   bool use_lower_camel_for_enums_;
+  bool use_ints_for_enums_;
+  bool add_trailing_zeros_;
+  bool render_unknown_enum_values_;
 };
 
 INSTANTIATE_TEST_CASE_P(DifferentTypeInfoSourceTest,
@@ -494,12 +509,37 @@ TEST_P(ProtostreamObjectSourceTest, EnumCaseIsUnchangedByDefault) {
   DoTest(book, Book::descriptor());
 }
 
-TEST_P(ProtostreamObjectSourceTest, UnknownEnum) {
+TEST_P(ProtostreamObjectSourceTest, UseIntsForEnumsTest) {
+  Book book;
+  book.set_type(Book::ACTION_AND_ADVENTURE);
+
+  UseIntsForEnums();
+
+  ow_.StartObject("")->RenderInt32("type", 3)->EndObject();
+  DoTest(book, Book::descriptor());
+}
+
+TEST_P(ProtostreamObjectSourceTest,
+       UnknownEnumAreDroppedWhenRenderUnknownEnumValuesIsUnset) {
   Proto3Message message;
   message.set_enum_value(static_cast<Proto3Message::NestedEnum>(1234));
-  ow_.StartObject("")
-      ->RenderInt32("enumValue", 1234)
-      ->EndObject();
+
+  SetRenderUnknownEnumValues(false);
+
+  // Unknown enum values are not output.
+  ow_.StartObject("")->EndObject();
+  DoTest(message, Proto3Message::descriptor());
+}
+
+TEST_P(ProtostreamObjectSourceTest,
+       UnknownEnumAreOutputWhenRenderUnknownEnumValuesIsSet) {
+  Proto3Message message;
+  message.set_enum_value(static_cast<Proto3Message::NestedEnum>(1234));
+
+  SetRenderUnknownEnumValues(true);
+
+  // Unknown enum values are output.
+  ow_.StartObject("")->RenderInt32("enumValue", 1234)->EndObject();
   DoTest(message, Proto3Message::descriptor());
 }
 
@@ -1022,6 +1062,7 @@ TEST_P(ProtostreamObjectSourceTimestampTest, TimestampDurationDefaultValue) {
 
   DoTest(out, TimestampDuration::descriptor());
 }
+
 
 }  // namespace converter
 }  // namespace util

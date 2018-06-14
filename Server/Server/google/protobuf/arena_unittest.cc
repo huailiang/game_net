@@ -180,6 +180,35 @@ TEST(ArenaTest, BasicCreate) {
   EXPECT_EQ(2, notifier.GetCount());
 }
 
+TEST(ArenaTest, CreateAndConstCopy) {
+  Arena arena;
+  const string s("foo");
+  const string* s_copy = Arena::Create<string>(&arena, s);
+  EXPECT_TRUE(s_copy != NULL);
+  EXPECT_EQ("foo", s);
+  EXPECT_EQ("foo", *s_copy);
+}
+
+TEST(ArenaTest, CreateAndNonConstCopy) {
+  Arena arena;
+  string s("foo");
+  const string* s_copy = Arena::Create<string>(&arena, s);
+  EXPECT_TRUE(s_copy != NULL);
+  EXPECT_EQ("foo", s);
+  EXPECT_EQ("foo", *s_copy);
+}
+
+#if LANG_CXX11
+TEST(ArenaTest, CreateAndMove) {
+  Arena arena;
+  string s("foo");
+  const string* s_move = Arena::Create<string>(&arena, std::move(s));
+  EXPECT_TRUE(s_move != NULL);
+  EXPECT_TRUE(s.empty());  // NOLINT
+  EXPECT_EQ("foo", *s_move);
+}
+#endif
+
 TEST(ArenaTest, CreateWithFourConstructorArguments) {
   Arena arena;
   const string three("3");
@@ -214,11 +243,34 @@ TEST(ArenaTest, CreateWithEightConstructorArguments) {
   ASSERT_EQ("8", new_object->eight_);
 }
 
+#if LANG_CXX11
+class PleaseMoveMe {
+ public:
+  explicit PleaseMoveMe(const string& value) : value_(value) {}
+  PleaseMoveMe(PleaseMoveMe&&) = default;
+  PleaseMoveMe(const PleaseMoveMe&) = delete;
+
+  const string& value() const { return value_; }
+
+ private:
+  string value_;
+};
+
+TEST(ArenaTest, CreateWithMoveArguments) {
+  Arena arena;
+  PleaseMoveMe one("1");
+  const PleaseMoveMe* new_object =
+      Arena::Create<PleaseMoveMe>(&arena, std::move(one));
+  EXPECT_TRUE(new_object);
+  ASSERT_EQ("1", new_object->value());
+}
+#endif
+
 TEST(ArenaTest, InitialBlockTooSmall) {
   // Construct a small (64 byte) initial block of memory to be used by the
   // arena allocator; then, allocate an object which will not fit in the
   // initial block.
-  std::vector<char> arena_block(64);
+  std::vector<char> arena_block(72);
   ArenaOptions options;
   options.initial_block = &arena_block[0];
   options.initial_block_size = arena_block.size();
@@ -249,7 +301,7 @@ TEST(ArenaTest, Parsing) {
   arena_message->ParseFromString(original.SerializeAsString());
   TestUtil::ExpectAllFieldsSet(*arena_message);
 
-  // Test that string fields have null terminator bytes (earlier bug).
+  // Test that string fields have nul terminator bytes (earlier bug).
   EXPECT_EQ(strlen(original.optional_string().c_str()),
             strlen(arena_message->optional_string().c_str()));
 }
@@ -1154,6 +1206,13 @@ TEST(ArenaTest, NoHeapAllocationsTest) {
   arena.Reset();
 }
 
+TEST(ArenaTest, ParseCorruptedString) {
+  TestAllTypes message;
+  TestUtil::SetAllFields(&message);
+  TestParseCorruptedString<TestAllTypes, true>(message);
+  TestParseCorruptedString<TestAllTypes, false>(message);
+}
+
 #ifndef GOOGLE_PROTOBUF_NO_RTTI
 // Test construction on an arena via generic MessageLite interface. We should be
 // able to successfully deserialize on the arena without incurring heap
@@ -1240,12 +1299,12 @@ TEST(ArenaTest, SpaceAllocated_and_Used) {
   options.initial_block_size = 0;
   Arena arena_3(options);
   EXPECT_EQ(0, arena_3.SpaceUsed());
-  ::google::protobuf::Arena::CreateArray<char>(&arena_3, 190);
+  ::google::protobuf::Arena::CreateArray<char>(&arena_3, 182);
   EXPECT_EQ(256, arena_3.SpaceAllocated());
-  EXPECT_EQ(Align8(190), arena_3.SpaceUsed());
+  EXPECT_EQ(Align8(182), arena_3.SpaceUsed());
   ::google::protobuf::Arena::CreateArray<char>(&arena_3, 70);
   EXPECT_EQ(256 + 512, arena_3.SpaceAllocated());
-  EXPECT_EQ(Align8(190) + Align8(70), arena_3.SpaceUsed());
+  EXPECT_EQ(Align8(182) + Align8(70), arena_3.SpaceUsed());
   EXPECT_EQ(256 + 512, arena_3.Reset());
 }
 

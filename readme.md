@@ -13,7 +13,7 @@
 
 客户端是Unity, 采用c#语言，服务器端使用的是c++。
 
-客户端采取的protobuf版本是:3.0.0 服务器对应的版本3.1.0
+客户端采取的protobuf版本是:3.5.1 服务器对应的版本3.5.1
 
 
 <b>客户端</b>
@@ -59,7 +59,7 @@ tools目录：
 
 运行build—server.bat 会生成服务器端对应的代码。
 
-服务端采用的protobuf版本是：protobuf-cpp-3.1.0， 对应的下载地址：https://github.com/google/protobuf/releases/download/v3.1.0/protobuf-cpp-3.1.0.zip
+服务端采用的protobuf版本是：protobuf-cpp-3.5.1， 对应的下载地址：https://github.com/google/protobuf/releases/download/v3.5.1/protobuf-cpp-3.5.1.zip
 
 服务器用到的protobuf编译生成的libprotocd.lib、libprotobufd.lib、protoc.exe由于文件太大， 没有上传。
 读者自行生成，可以参照csdn这篇paper: https://blog.csdn.net/program_anywhere/article/details/77365876  

@@ -42,11 +42,13 @@
 #include <google/protobuf/compiler/java/java_file.h>
 #include <google/protobuf/compiler/java/java_generator_factory.h>
 #include <google/protobuf/compiler/java/java_helpers.h>
+#include <google/protobuf/compiler/java/java_name_resolver.h>
 #include <google/protobuf/compiler/java/java_options.h>
 #include <google/protobuf/compiler/java/java_shared_code_generator.h>
 #include <google/protobuf/io/printer.h>
 #include <google/protobuf/io/zero_copy_stream.h>
 #include <google/protobuf/descriptor.pb.h>
+
 #include <google/protobuf/stubs/strutil.h>
 
 namespace google {
@@ -66,7 +68,7 @@ bool JavaGenerator::Generate(const FileDescriptor* file,
   // parse generator options
 
 
-  vector<pair<string, string> > options;
+  std::vector<std::pair<string, string> > options;
   ParseGeneratorParameter(parameter, &options);
   Options file_options;
 
@@ -105,11 +107,11 @@ bool JavaGenerator::Generate(const FileDescriptor* file,
   // -----------------------------------------------------------------
 
 
-  vector<string> all_files;
-  vector<string> all_annotations;
+  std::vector<string> all_files;
+  std::vector<string> all_annotations;
 
 
-  vector<FileGenerator*> file_generators;
+  std::vector<FileGenerator*> file_generators;
   if (file_options.generate_immutable_code) {
     file_generators.push_back(new FileGenerator(file, file_options,
                                                 /* immutable = */ true));

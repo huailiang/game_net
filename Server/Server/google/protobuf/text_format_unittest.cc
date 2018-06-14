@@ -53,11 +53,12 @@
 #include <google/protobuf/unittest_mset_wire_format.pb.h>
 #include <google/protobuf/io/tokenizer.h>
 #include <google/protobuf/io/zero_copy_stream_impl.h>
-#include <google/protobuf/stubs/mathlimits.h>
+
 #include <google/protobuf/stubs/strutil.h>
 #include <google/protobuf/stubs/substitute.h>
 #include <google/protobuf/testing/googletest.h>
 #include <gtest/gtest.h>
+#include <google/protobuf/stubs/mathlimits.h>
 
 
 namespace google {
@@ -454,13 +455,29 @@ TEST_F(TextFormatTest, FieldSpecificCustomPrinter) {
   EXPECT_EQ("optional_int32: value-is(42)\nrepeated_int32: 42\n", text);
 }
 
+TEST_F(TextFormatTest, FieldSpecificCustomPrinterRegisterSameFieldTwice) {
+  protobuf_unittest::TestAllTypes message;
+  TextFormat::Printer printer;
+  const FieldDescriptor* const field =
+      message.GetDescriptor()->FindFieldByName("optional_int32");
+  ASSERT_TRUE(printer.RegisterFieldValuePrinter(
+      field, new CustomInt32FieldValuePrinter()));
+  const TextFormat::FieldValuePrinter* const rejected =
+      new CustomInt32FieldValuePrinter();
+  ASSERT_FALSE(printer.RegisterFieldValuePrinter(field, rejected));
+  delete rejected;
+}
+
 TEST_F(TextFormatTest, ErrorCasesRegisteringFieldValuePrinterShouldFail) {
   protobuf_unittest::TestAllTypes message;
   TextFormat::Printer printer;
   // NULL printer.
   EXPECT_FALSE(printer.RegisterFieldValuePrinter(
       message.GetDescriptor()->FindFieldByName("optional_int32"),
-      NULL));
+      static_cast<const TextFormat::FieldValuePrinter*>(NULL)));
+  EXPECT_FALSE(printer.RegisterFieldValuePrinter(
+      message.GetDescriptor()->FindFieldByName("optional_int32"),
+      static_cast<const TextFormat::FastFieldValuePrinter*>(NULL)));
   // Because registration fails, the ownership of this printer is never taken.
   TextFormat::FieldValuePrinter my_field_printer;
   // NULL field
@@ -993,10 +1010,14 @@ TEST_F(TextFormatTest, ParseExotic) {
   EXPECT_EQ(1.235E22  , message.repeated_double(4));
   EXPECT_EQ(1.235E-18 , message.repeated_double(5));
   EXPECT_EQ(123.456789, message.repeated_double(6));
-  EXPECT_EQ(message.repeated_double(7), numeric_limits<double>::infinity());
-  EXPECT_EQ(message.repeated_double(8), numeric_limits<double>::infinity());
-  EXPECT_EQ(message.repeated_double(9), -numeric_limits<double>::infinity());
-  EXPECT_EQ(message.repeated_double(10), -numeric_limits<double>::infinity());
+  EXPECT_EQ(message.repeated_double(7),
+            std::numeric_limits<double>::infinity());
+  EXPECT_EQ(message.repeated_double(8),
+            std::numeric_limits<double>::infinity());
+  EXPECT_EQ(message.repeated_double(9),
+            -std::numeric_limits<double>::infinity());
+  EXPECT_EQ(message.repeated_double(10),
+            -std::numeric_limits<double>::infinity());
   EXPECT_TRUE(MathLimits<double>::IsNaN(message.repeated_double(11)));
   EXPECT_TRUE(MathLimits<double>::IsNaN(message.repeated_double(12)));
 
@@ -1500,7 +1521,7 @@ TEST_F(TextFormatParserTest, ExplicitDelimiters) {
 }
 
 TEST_F(TextFormatParserTest, PrintErrorsToStderr) {
-  vector<string> errors;
+  std::vector<string> errors;
 
   {
     ScopedMemoryLog log;
@@ -1517,7 +1538,7 @@ TEST_F(TextFormatParserTest, PrintErrorsToStderr) {
 }
 
 TEST_F(TextFormatParserTest, FailsOnTokenizationError) {
-  vector<string> errors;
+  std::vector<string> errors;
 
   {
     ScopedMemoryLog log;
@@ -1576,7 +1597,7 @@ TEST_F(TextFormatMessageSetTest, Deserialize) {
     protobuf_unittest::TestMessageSetExtension2::message_set_extension).str());
 
   // Ensure that these are the only entries present.
-  vector<const FieldDescriptor*> descriptors;
+  std::vector<const FieldDescriptor*> descriptors;
   proto.message_set().GetReflection()->ListFields(
     proto.message_set(), &descriptors);
   EXPECT_EQ(2, descriptors.size());

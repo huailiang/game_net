@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "protobuf-lib", "protobuf-lib\protobuf-lib.csproj", "{067838A2-C471-49FF-ABB0-80D536819569}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{067838A2-C471-49FF-ABB0-80D536819569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{067838A2-C471-49FF-ABB0-80D536819569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{067838A2-C471-49FF-ABB0-80D536819569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{067838A2-C471-49FF-ABB0-80D536819569}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAC44905-9444-49F4-89C0-D76D1CCBE32B}
+	EndGlobalSection
+EndGlobal
