@@ -65,11 +65,11 @@ namespace Google.Protobuf
         /// </summary>
         public static readonly int DefaultBufferSize = 4096;
 
-        private readonly bool leaveOpen;
-        private readonly byte[] buffer;
-        private readonly int limit;
+        private bool leaveOpen;
+        private byte[] buffer;
+        private int limit;
         private int position;
-        private readonly Stream output;
+        private Stream output;
 
         #region Construction
         /// <summary>
@@ -146,6 +146,33 @@ namespace Google.Protobuf
         }
         #endregion
 
+        public void Set(byte[] buffer)
+        {
+            Set(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), true);
+        }
+
+
+        private static byte[] streambuff;
+        public void Set(Stream output)
+        {
+            if (streambuff == null) streambuff = new byte[DefaultBufferSize];
+            Set(ProtoPreconditions.CheckNotNull(output, "output"), streambuff, false);
+        }
+
+        public void Set(Stream output, byte[] buffer, bool leaveOpen)
+        {
+            this.output = ProtoPreconditions.CheckNotNull(output, nameof(output));
+            this.buffer = buffer;
+            this.position = 0;
+            this.limit = buffer.Length;
+            this.leaveOpen = leaveOpen;
+        }
+
+        public Stream GetStream()
+        {
+            return this.output;
+        }
+
         /// <summary>
         /// Returns the current position in the stream, or the position in the output buffer
         /// </summary>
@@ -212,7 +239,7 @@ namespace Google.Protobuf
         /// <param name="value">The value to write</param>
         public void WriteInt64(long value)
         {
-            WriteRawVarint64((ulong) value);
+            WriteRawVarint64((ulong)value);
         }
 
         /// <summary>
@@ -223,12 +250,12 @@ namespace Google.Protobuf
         {
             if (value >= 0)
             {
-                WriteRawVarint32((uint) value);
+                WriteRawVarint32((uint)value);
             }
             else
             {
                 // Must sign-extend.
-                WriteRawVarint64((ulong) value);
+                WriteRawVarint64((ulong)value);
             }
         }
 
@@ -256,7 +283,7 @@ namespace Google.Protobuf
         /// <param name="value">The value to write</param>
         public void WriteBool(bool value)
         {
-            WriteRawByte(value ? (byte) 1 : (byte) 0);
+            WriteRawByte(value ? (byte)1 : (byte)0);
         }
 
         /// <summary>
@@ -338,7 +365,7 @@ namespace Google.Protobuf
         /// <param name="value">The value to write.</param>
         public void WriteSFixed32(int value)
         {
-            WriteRawLittleEndian32((uint) value);
+            WriteRawLittleEndian32((uint)value);
         }
 
         /// <summary>
@@ -347,7 +374,7 @@ namespace Google.Protobuf
         /// <param name="value">The value to write</param>
         public void WriteSFixed64(long value)
         {
-            WriteRawLittleEndian64((ulong) value);
+            WriteRawLittleEndian64((ulong)value);
         }
 
         /// <summary>
@@ -377,7 +404,7 @@ namespace Google.Protobuf
         /// <param name="length">Length value, in bytes.</param>
         public void WriteLength(int length)
         {
-            WriteRawVarint32((uint) length);
+            WriteRawVarint32((uint)length);
         }
 
         #endregion
@@ -485,21 +512,21 @@ namespace Google.Protobuf
 
             while (value > 127 && position < limit)
             {
-                buffer[position++] = (byte) ((value & 0x7F) | 0x80);
+                buffer[position++] = (byte)((value & 0x7F) | 0x80);
                 value >>= 7;
             }
             while (value > 127)
             {
-                WriteRawByte((byte) ((value & 0x7F) | 0x80));
+                WriteRawByte((byte)((value & 0x7F) | 0x80));
                 value >>= 7;
             }
             if (position < limit)
             {
-                buffer[position++] = (byte) value;
+                buffer[position++] = (byte)value;
             }
             else
             {
-                WriteRawByte((byte) value);
+                WriteRawByte((byte)value);
             }
         }
 
@@ -507,21 +534,21 @@ namespace Google.Protobuf
         {
             while (value > 127 && position < limit)
             {
-                buffer[position++] = (byte) ((value & 0x7F) | 0x80);
+                buffer[position++] = (byte)((value & 0x7F) | 0x80);
                 value >>= 7;
             }
             while (value > 127)
             {
-                WriteRawByte((byte) ((value & 0x7F) | 0x80));
+                WriteRawByte((byte)((value & 0x7F) | 0x80));
                 value >>= 7;
             }
             if (position < limit)
             {
-                buffer[position++] = (byte) value;
+                buffer[position++] = (byte)value;
             }
             else
             {
-                WriteRawByte((byte) value);
+                WriteRawByte((byte)value);
             }
         }
 
@@ -529,17 +556,17 @@ namespace Google.Protobuf
         {
             if (position + 4 > limit)
             {
-                WriteRawByte((byte) value);
-                WriteRawByte((byte) (value >> 8));
-                WriteRawByte((byte) (value >> 16));
-                WriteRawByte((byte) (value >> 24));
+                WriteRawByte((byte)value);
+                WriteRawByte((byte)(value >> 8));
+                WriteRawByte((byte)(value >> 16));
+                WriteRawByte((byte)(value >> 24));
             }
             else
             {
-                buffer[position++] = ((byte) value);
-                buffer[position++] = ((byte) (value >> 8));
-                buffer[position++] = ((byte) (value >> 16));
-                buffer[position++] = ((byte) (value >> 24));
+                buffer[position++] = ((byte)value);
+                buffer[position++] = ((byte)(value >> 8));
+                buffer[position++] = ((byte)(value >> 16));
+                buffer[position++] = ((byte)(value >> 24));
             }
         }
 
@@ -547,25 +574,25 @@ namespace Google.Protobuf
         {
             if (position + 8 > limit)
             {
-                WriteRawByte((byte) value);
-                WriteRawByte((byte) (value >> 8));
-                WriteRawByte((byte) (value >> 16));
-                WriteRawByte((byte) (value >> 24));
-                WriteRawByte((byte) (value >> 32));
-                WriteRawByte((byte) (value >> 40));
-                WriteRawByte((byte) (value >> 48));
-                WriteRawByte((byte) (value >> 56));
+                WriteRawByte((byte)value);
+                WriteRawByte((byte)(value >> 8));
+                WriteRawByte((byte)(value >> 16));
+                WriteRawByte((byte)(value >> 24));
+                WriteRawByte((byte)(value >> 32));
+                WriteRawByte((byte)(value >> 40));
+                WriteRawByte((byte)(value >> 48));
+                WriteRawByte((byte)(value >> 56));
             }
             else
             {
-                buffer[position++] = ((byte) value);
-                buffer[position++] = ((byte) (value >> 8));
-                buffer[position++] = ((byte) (value >> 16));
-                buffer[position++] = ((byte) (value >> 24));
-                buffer[position++] = ((byte) (value >> 32));
-                buffer[position++] = ((byte) (value >> 40));
-                buffer[position++] = ((byte) (value >> 48));
-                buffer[position++] = ((byte) (value >> 56));
+                buffer[position++] = ((byte)value);
+                buffer[position++] = ((byte)(value >> 8));
+                buffer[position++] = ((byte)(value >> 16));
+                buffer[position++] = ((byte)(value >> 24));
+                buffer[position++] = ((byte)(value >> 32));
+                buffer[position++] = ((byte)(value >> 40));
+                buffer[position++] = ((byte)(value >> 48));
+                buffer[position++] = ((byte)(value >> 56));
             }
         }
 
@@ -581,7 +608,7 @@ namespace Google.Protobuf
 
         internal void WriteRawByte(uint value)
         {
-            WriteRawByte((byte) value);
+            WriteRawByte((byte)value);
         }
 
         /// <summary>
@@ -645,7 +672,7 @@ namespace Google.Protobuf
         internal static uint EncodeZigZag32(int n)
         {
             // Note:  the right-shift must be arithmetic
-            return (uint) ((n << 1) ^ (n >> 31));
+            return (uint)((n << 1) ^ (n >> 31));
         }
 
         /// <summary>
@@ -659,7 +686,7 @@ namespace Google.Protobuf
         /// </remarks>
         internal static ulong EncodeZigZag64(long n)
         {
-            return (ulong) ((n << 1) ^ (n >> 63));
+            return (ulong)((n << 1) ^ (n >> 63));
         }
 
         private void RefreshBuffer()

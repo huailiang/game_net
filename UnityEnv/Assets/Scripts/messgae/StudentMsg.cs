@@ -10,13 +10,13 @@ namespace XNet
         {
             id = 1002;
         }
-        
+
         public override void OnProcess(byte[] pBuffer)
         {
             Student p = Student.Parser.ParseFrom(pBuffer);
-            Debug.Log("age:" + p.Age + " num: " + p.Num + " name: " + p.Name);
+            Debug.Log("age:" + p.Age + " num: " + p.Num);
 
-            GameObject go = new GameObject(p.Name);
+            GameObject go = new GameObject(p.Num.ToString());
             go.transform.position = Vector3.zero;
         }
 

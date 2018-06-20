@@ -144,6 +144,14 @@ namespace Google.Protobuf
             codedOutput.Flush();
         }
 
+        public static void WriteToSharedStream(this IMessage message, CodedOutputStream output)
+        {
+            ProtoPreconditions.CheckNotNull(message, "message");
+            ProtoPreconditions.CheckNotNull(output, "output");
+            message.WriteTo(output);
+            output.Flush();
+        }
+
         /// <summary>
         /// Writes the length and then data of the given message to a stream.
         /// </summary>

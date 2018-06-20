@@ -28,7 +28,6 @@ public class TestSocket : MonoBehaviour
         {
             Student s = new Student();
             s.Age = 12;
-            s.Name = "hug";
             s.Num = 1002;
             XNetworkMgr.sington.Send(s);
         }

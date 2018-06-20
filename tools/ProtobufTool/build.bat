@@ -3,15 +3,15 @@
 echo --del old cs and clean env
 
 del /q PBMessage.cs
-del /q GamePb3.cs
+del /q Game.cs
 
-echo --gen proto message to GamePb3.cs 
+echo --gen proto message to Game.cs 
 
-protoc --csharp_out ./ game-pb3.proto
+protoc --csharp_out ./ game.proto
 
-echo --rename GamePb3.cs to PBMessage.cs
+echo --rename Game.cs to PBMessage.cs
 
-copy /y GamePb3.cs PBMessage.cs
+copy /y Game.cs PBMessage.cs
 
 echo --copy cs to unity project 
 
