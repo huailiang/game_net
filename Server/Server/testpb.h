@@ -10,9 +10,6 @@ using namespace std;
 class testpb
 {
 public:
-	testpb();
-	~testpb();
-
 	void serial();
 	void deserial();
 };

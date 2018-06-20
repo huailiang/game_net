@@ -7,9 +7,9 @@
     <ClCompile Include="common.cpp" />
     <ClCompile Include="networkmgr.cpp" />
     <ClCompile Include="protomsg.cpp" />
-    <ClCompile Include="game.pb.cc" />
     <ClCompile Include="StudentMsg.cpp" />
     <ClCompile Include="PeopleMsg.cpp" />
+    <ClCompile Include="game.pb.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="testpb.h" />
@@ -18,8 +18,8 @@
     <ClInclude Include="networkmgr.h" />
     <ClInclude Include="protomsg.h" />
     <ClInclude Include="sington.h" />
-    <ClInclude Include="game.pb.h" />
     <ClInclude Include="StudentMsg.h" />
     <ClInclude Include="PeopleMsg.h" />
+    <ClInclude Include="game.pb.h" />
   </ItemGroup>
 </Project>

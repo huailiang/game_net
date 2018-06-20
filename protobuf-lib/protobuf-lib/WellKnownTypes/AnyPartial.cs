@@ -40,10 +40,9 @@ namespace Google.Protobuf.WellKnownTypes
 
         // This could be moved to MessageDescriptor if we wanted to, but keeping it here means
         // all the Any-specific code is in the same place.
-        private static string GetTypeUrl(MessageDescriptor descriptor, string prefix)
-        {
-            return prefix.EndsWith("/") ? prefix + descriptor.FullName : prefix + "/" + descriptor.FullName;
-        }
+        private static string GetTypeUrl(MessageDescriptor descriptor, string prefix) =>
+            prefix.EndsWith("/") ? prefix + descriptor.FullName : prefix + "/" + descriptor.FullName;
+
         /// <summary>
         /// Retrieves the type name for a type URL, matching the <see cref="DescriptorBase.FullName"/>
         /// of the packed message type.
@@ -63,7 +62,7 @@ namespace Google.Protobuf.WellKnownTypes
         /// <returns>The type name</returns>
         public static string GetTypeName(string typeUrl)
         {
-            ProtoPreconditions.CheckNotNull(typeUrl, "typeUrl");
+            ProtoPreconditions.CheckNotNull(typeUrl, nameof(typeUrl));
             int lastSlash = typeUrl.LastIndexOf('/');
             return lastSlash == -1 ? "" : typeUrl.Substring(lastSlash + 1);
         }
@@ -83,7 +82,7 @@ namespace Google.Protobuf.WellKnownTypes
             if (GetTypeName(TypeUrl) != target.Descriptor.FullName)
             {
                 throw new InvalidProtocolBufferException(
-                    "Full type name for " + target.Descriptor.Name + " is " + target.Descriptor.FullName + "; Any message's type url is " + TypeUrl);
+                    $"Full type name for {target.Descriptor.Name} is {target.Descriptor.FullName}; Any message's type url is {TypeUrl}");
             }
             target.MergeFrom(Value);
             return target;
@@ -115,7 +114,7 @@ namespace Google.Protobuf.WellKnownTypes
         /// </summary>
         /// <param name="message">The message to pack.</param>
         /// <returns>An Any message with the content and type URL of <paramref name="message"/>.</returns>
-        public static Any Pack(IMessage message) { return Pack(message, DefaultPrefix); }
+        public static Any Pack(IMessage message) => Pack(message, DefaultPrefix);
 
         /// <summary>
         /// Packs the specified message into an Any message using the specified type URL prefix.
@@ -125,8 +124,8 @@ namespace Google.Protobuf.WellKnownTypes
         /// <returns>An Any message with the content and type URL of <paramref name="message"/>.</returns>
         public static Any Pack(IMessage message, string typeUrlPrefix)
         {
-            ProtoPreconditions.CheckNotNull(message, "message");
-            ProtoPreconditions.CheckNotNull(typeUrlPrefix, "typeUrlPrefix");
+            ProtoPreconditions.CheckNotNull(message, nameof(message));
+            ProtoPreconditions.CheckNotNull(typeUrlPrefix, nameof(typeUrlPrefix));
             return new Any
             {
                 TypeUrl = GetTypeUrl(message.Descriptor, typeUrlPrefix),

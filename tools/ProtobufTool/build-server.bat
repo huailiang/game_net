@@ -1,6 +1,5 @@
 @echo off
 
-
 echo ¿ªÊ¼¿½±´protoµ½Server
 copy game.proto ..\..\Server\Server\
 

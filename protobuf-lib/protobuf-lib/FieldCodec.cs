@@ -288,7 +288,7 @@ namespace Google.Protobuf
                 {
                     throw new InvalidOperationException("Invalid type argument requested for wrapper codec: " + typeof(T));
                 }
-                return (FieldCodec<T>)value;
+                return (FieldCodec<T>) value;
             }
 
             internal static T Read<T>(CodedInputStream input, FieldCodec<T> codec)
@@ -322,7 +322,7 @@ namespace Google.Protobuf
                 codec.WriteTagAndValue(output, value);
             }
 
-            internal static int CalculateSize<T>(T value, FieldCodec<T> codec)
+            internal  static int CalculateSize<T>(T value, FieldCodec<T> codec)
             {
                 int fieldLength = codec.CalculateSizeWithTag(value);
                 return CodedOutputStream.ComputeLengthSize(fieldLength) + fieldLength;
@@ -365,33 +365,31 @@ namespace Google.Protobuf
             // Otherwise it's the default value of the CLR type
         }
 
-        internal static bool IsPackedRepeatedField(uint tag)
-        {
-            return TypeSupportsPacking && WireFormat.GetTagWireType(tag) == WireFormat.WireType.LengthDelimited;
-        }
+        internal static bool IsPackedRepeatedField(uint tag) =>
+            TypeSupportsPacking && WireFormat.GetTagWireType(tag) == WireFormat.WireType.LengthDelimited;
 
-        internal bool PackedRepeatedField { get; private set; }
+        internal bool PackedRepeatedField { get; }
 
         /// <summary>
         /// Returns a delegate to write a value (unconditionally) to a coded output stream.
         /// </summary>
-        internal Action<CodedOutputStream, T> ValueWriter { get; private set; }
+        internal Action<CodedOutputStream, T> ValueWriter { get; }
 
         /// <summary>
         /// Returns the size calculator for just a value.
         /// </summary>
-        internal Func<T, int> ValueSizeCalculator { get; private set; }
+        internal Func<T, int> ValueSizeCalculator { get; }
 
         /// <summary>
         /// Returns a delegate to read a value from a coded input stream. It is assumed that
         /// the stream is already positioned on the appropriate tag.
         /// </summary>
-        internal Func<CodedInputStream, T> ValueReader { get; private set; }
+        internal Func<CodedInputStream, T> ValueReader { get; }
 
         /// <summary>
         /// Returns the fixed size for an entry, or 0 if sizes vary.
         /// </summary>
-        internal int FixedSize { get; private set; }
+        internal int FixedSize { get; }
 
         /// <summary>
         /// Gets the tag of the codec.
@@ -399,7 +397,7 @@ namespace Google.Protobuf
         /// <value>
         /// The tag of the codec.
         /// </value>
-        internal uint Tag { get; private set; }
+        internal uint Tag { get; }
 
         /// <summary>
         /// Default value for this codec. Usually the same for every instance of the same type, but
@@ -409,10 +407,10 @@ namespace Google.Protobuf
         /// <value>
         /// The default value of the codec's type.
         /// </value>
-        internal T DefaultValue { get; private set; }
+        internal T DefaultValue { get; }
 
         private readonly int tagSize;
-
+        
         internal FieldCodec(
                 Func<CodedInputStream, T> reader,
                 Action<CodedOutputStream, T> writer,
@@ -465,14 +463,14 @@ namespace Google.Protobuf
         /// </summary>
         /// <param name="input">The input stream to read from.</param>
         /// <returns>The value read from the stream.</returns>
-        public T Read(CodedInputStream input) { return ValueReader(input); }
+        public T Read(CodedInputStream input) => ValueReader(input);
 
         /// <summary>
         /// Calculates the size required to write the given value, with a tag,
         /// if the value is not the default.
         /// </summary>
-        public int CalculateSizeWithTag(T value) { return IsDefault(value) ? 0 : ValueSizeCalculator(value) + tagSize; } 
+        public int CalculateSizeWithTag(T value) => IsDefault(value) ? 0 : ValueSizeCalculator(value) + tagSize;
 
-    private bool IsDefault(T value) { return EqualityComparer.Equals(value, DefaultValue); } 
+        private bool IsDefault(T value) => EqualityComparer.Equals(value, DefaultValue);
     }
 }

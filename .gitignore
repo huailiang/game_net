@@ -17,6 +17,7 @@
 **/UnityEnv/[Bb]uild/
 **/UnityEnv/.vs/
 
+**/protobuf-lib/.vs/
 **/protobuf-lib/protobuf-lib/bin
 **/protobuf-lib/protobuf-lib/obj
 

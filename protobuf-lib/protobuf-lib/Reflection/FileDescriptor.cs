@@ -123,63 +123,63 @@ namespace Google.Protobuf.Reflection
         /// <value>
         /// The descriptor in its protocol message representation.
         /// </value>
-        internal FileDescriptorProto Proto { get; private set; }
+        internal FileDescriptorProto Proto { get; }
 
         /// <value>
         /// The file name.
         /// </value>
-        public string Name { get { return Proto.Name; } }
+        public string Name => Proto.Name;
 
         /// <summary>
         /// The package as declared in the .proto file. This may or may not
         /// be equivalent to the .NET namespace of the generated classes.
         /// </summary>
-        public string Package { get { return Proto.Package; } }
+        public string Package => Proto.Package;
 
         /// <value>
         /// Unmodifiable list of top-level message types declared in this file.
         /// </value>
-        public IList<MessageDescriptor> MessageTypes { get; private set; }
+        public IList<MessageDescriptor> MessageTypes { get; }
 
         /// <value>
         /// Unmodifiable list of top-level enum types declared in this file.
         /// </value>
-        public IList<EnumDescriptor> EnumTypes { get; private set; }
+        public IList<EnumDescriptor> EnumTypes { get; }
 
         /// <value>
         /// Unmodifiable list of top-level services declared in this file.
         /// </value>
-        public IList<ServiceDescriptor> Services { get; private set; }
+        public IList<ServiceDescriptor> Services { get; }
 
         /// <value>
         /// Unmodifiable list of this file's dependencies (imports).
         /// </value>
-        public IList<FileDescriptor> Dependencies { get; private set; }
+        public IList<FileDescriptor> Dependencies { get; }
 
         /// <value>
         /// Unmodifiable list of this file's public dependencies (public imports).
         /// </value>
-        public IList<FileDescriptor> PublicDependencies { get; private set; }
+        public IList<FileDescriptor> PublicDependencies { get; }
 
         /// <value>
         /// The original serialized binary form of this descriptor.
         /// </value>
-        public ByteString SerializedData { get; private set; }
+        public ByteString SerializedData { get; }
 
         /// <value>
         /// Implementation of IDescriptor.FullName - just returns the same as Name.
         /// </value>
-        string IDescriptor.FullName { get { return Name; } }
+        string IDescriptor.FullName => Name;
 
         /// <value>
         /// Implementation of IDescriptor.File - just returns this descriptor.
         /// </value>
-        FileDescriptor IDescriptor.File { get { return this; } }
+        FileDescriptor IDescriptor.File => this;
 
         /// <value>
         /// Pool containing symbol descriptors.
         /// </value>
-        internal DescriptorPool DescriptorPool { get; private set; }
+        internal DescriptorPool DescriptorPool { get; }
 
         /// <summary>
         /// Finds a type (message, enum, service or extension) in the file by name. Does not find nested types.
@@ -300,7 +300,7 @@ namespace Google.Protobuf.Reflection
             }
             catch (DescriptorValidationException e)
             {
-                throw new ArgumentException("Invalid embedded descriptor for " + proto.Name, e);
+                throw new ArgumentException($"Invalid embedded descriptor for \"{proto.Name}\".", e);
             }
         }
 
@@ -312,7 +312,7 @@ namespace Google.Protobuf.Reflection
         /// </returns>
         public override string ToString()
         {
-            return "FileDescriptor for "+Name;
+            return $"FileDescriptor for {Name}";
         }
 
         /// <summary>
@@ -333,6 +333,6 @@ namespace Google.Protobuf.Reflection
         /// <summary>
         /// The (possibly empty) set of custom options for this file.
         /// </summary>
-        public CustomOptions CustomOptions { get { return Proto.Options != null ? Proto.Options.CustomOptions : null ?? CustomOptions.Empty; } }
+        public CustomOptions CustomOptions => Proto.Options?.CustomOptions ?? CustomOptions.Empty;
     }
 }

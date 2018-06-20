@@ -37,8 +37,8 @@ public class TestProto : MonoBehaviour
         {
             Byte[] bytes = File.ReadAllBytes(basePath + "/data/test.bytes");
             FillInputStream(bytes);
-            Test proto = Test.Parser.ParseFrom(sharedStream);
-            Debug.Log("index: " + proto.Index + " age: " + proto.Age);
+            Student proto = Student.Parser.ParseFrom(sharedStream);
+            Debug.Log("name: " + proto.Name + " age: " + proto.Age);
         }
         if (GUI.Button(new Rect(20, 260, 100, 60), "GC"))
         {
@@ -52,7 +52,7 @@ public class TestProto : MonoBehaviour
     {
         if (parse)
         {
-            Test.Parser.ParseFrom(sharedStream);
+            Student.Parser.ParseFrom(sharedStream);
         }
     }
 
@@ -71,15 +71,15 @@ public class TestProto : MonoBehaviour
 
     private void WriteTestBuf()
     {
-        Test proto = new Test();
-        proto.Index = 1024;
+        Student proto = new Student();
+        proto.Name = "";
         proto.Age = 64;
         using (MemoryStream ms = new MemoryStream())
         {
             proto.WriteTo(ms);
             Byte[] pBuffer = ms.ToArray();
             Util.PrintBytes(pBuffer);
-            File.WriteAllBytes(basePath + "/data/test.bytes", pBuffer);
+            File.WriteAllBytes(basePath + "/data/student.bytes", pBuffer);
             ms.SetLength(0);
         }
     }

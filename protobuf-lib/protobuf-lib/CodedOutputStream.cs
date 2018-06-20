@@ -97,7 +97,7 @@ namespace Google.Protobuf
 
         private CodedOutputStream(Stream output, byte[] buffer, bool leaveOpen)
         {
-            this.output = ProtoPreconditions.CheckNotNull(output, "output");
+            this.output = ProtoPreconditions.CheckNotNull(output, nameof(output));
             this.buffer = buffer;
             this.position = 0;
             this.limit = buffer.Length;

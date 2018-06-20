@@ -93,7 +93,7 @@ namespace Google.Protobuf.Reflection
         /// <summary>
         /// The (possibly empty) set of custom options for this oneof.
         /// </summary>
-        public CustomOptions CustomOptions { get { return proto.Options != null ? proto.Options.CustomOptions : null ?? CustomOptions.Empty; } }
+        public CustomOptions CustomOptions => proto.Options?.CustomOptions ?? CustomOptions.Empty;
 
         internal void CrossLink()
         {
@@ -113,12 +113,12 @@ namespace Google.Protobuf.Reflection
             var caseProperty = containingType.ClrType.GetProperty(clrName + "Case");
             if (caseProperty == null)
             {
-                throw new DescriptorValidationException(this, "Property " + clrName + "Case not found in " + containingType.ClrType);
+                throw new DescriptorValidationException(this, $"Property {clrName}Case not found in {containingType.ClrType}");
             }
             var clearMethod = containingType.ClrType.GetMethod("Clear" + clrName);
             if (clearMethod == null)
             {
-                throw new DescriptorValidationException(this, "Method Clear" + clrName + " not found in " + containingType.ClrType);
+                throw new DescriptorValidationException(this, $"Method Clear{clrName} not found in {containingType.ClrType}");
             }
 
             return new OneofAccessor(caseProperty, clearMethod, this);

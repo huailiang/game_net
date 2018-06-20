@@ -57,7 +57,7 @@ namespace Google.Protobuf.Reflection
         /// <param name="name">The name of the element in the .proto file.</param>
         public OriginalNameAttribute(string name)
         {
-            Name = ProtoPreconditions.CheckNotNull(name, "name");
+            Name = ProtoPreconditions.CheckNotNull(name, nameof(name));
             PreferredAlias = true;
         }
 	

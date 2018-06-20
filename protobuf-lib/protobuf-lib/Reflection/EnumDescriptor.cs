@@ -116,6 +116,6 @@ namespace Google.Protobuf.Reflection
         /// <summary>
         /// The (possibly empty) set of custom options for this enum.
         /// </summary>
-        public CustomOptions CustomOptions { get { return Proto.Options != null ? Proto.Options.CustomOptions : null ?? CustomOptions.Empty; } }
+        public CustomOptions CustomOptions => Proto.Options?.CustomOptions ?? CustomOptions.Empty;
     }
 }

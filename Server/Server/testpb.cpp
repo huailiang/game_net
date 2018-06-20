@@ -1,18 +1,6 @@
 #include "testpb.h"
 
 
-
-testpb::testpb()
-{
-}
-
-
-testpb::~testpb()
-{
-}
-
-
-
 void testpb::serial()
 {
 	XNet::People person;
@@ -26,11 +14,11 @@ void testpb::serial()
 	}
 
 	fstream output("data.bytes", ios::out | ios::trunc | ios::binary);
-	if (!person.SerializePartialToOstream(&output))
-	{
-		cerr << "serializer error" << endl;
-	}
-	output.close();
+	//if (!person.SerializePartialToOstream(&output))
+	//{
+	//	cerr << "serializer error" << endl;
+	//}
+	//output.close();
 	deserial();
 }
 
@@ -39,12 +27,12 @@ void testpb::deserial()
 {
 	XNet::People person;
 	fstream in("data.bytes", ios::in | ios::binary);
-	if (!person.ParseFromIstream(&in))
-	{
-		cerr << "failed to parse data.bytes";
-		system("pause");
-		exit(1);
-	}
+	//if (!person.ParseFromIstream(&in))
+	//{
+	//	cerr << "failed to parse data.bytes";
+	//	system("pause");
+	//	exit(1);
+	//}
 
 	cout << "id:" << person.id() << endl;
 	cout << "name:" << person.name() << endl;

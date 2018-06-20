@@ -11,18 +11,19 @@
 </p>
 
 
-客户端是Unity, 采用c#语言，服务器端使用的是c++。
+客户端是Unity2017.3.1f1, 采用c#语言，服务器端使用的是c++。
 
 客户端采取的protobuf版本是:3.5.1 服务器对应的版本3.5.1
 
 
 <b>客户端</b>
 
-由于谷歌官方给的版本对.net要求比较高，而且需要jit功能(ios被苹果禁止)，所以我们找到了第三方编译的版本。
+我们客户端protobuf来源于google官方的github仓库，对应本项目protobuf-lib文件夹，我们在生成的dll的时候通过后处理事件，同时生成对应的mdb文件，且copy到对应的unity目录。所以需要你配置环境变量：
+UnityInstallPath，即unity的安装路径，不包含到Editor
 
 关于unity protobuf的信息可以参考：https://github.com/google/protobuf/issues/644
 
-客户端版本来源：https://github.com/bitcraftCoLtd/protobuf3-for-unity
+
 
 
 通过修改上面的源码，在这里我们优化消除了protobuf在序列化和反序列化时候产生gc的状况。原生的代码使用了大量的.net4和.net6的语法， 我们也直接修改成net3以下 unity直接支持的语法。

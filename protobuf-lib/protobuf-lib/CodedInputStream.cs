@@ -57,7 +57,7 @@ namespace Google.Protobuf
         /// Whether to leave the underlying stream open when disposing of this stream.
         /// This is always true when there's no stream.
         /// </summary>
-        private readonly bool leaveOpen;
+        private  bool leaveOpen;
 
         /// <summary>
         /// Buffer of data read from the stream or provided at construction time.
@@ -201,12 +201,13 @@ namespace Google.Protobuf
         }
         #endregion
 
+
         public void Set(byte[] buffer)
         {
-            Set(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), 0, buffer.Length);
+            Set(null, ProtoPreconditions.CheckNotNull(buffer, "buffer"), 0, buffer.Length, true);
         }
 
-        public void Set(Stream input, byte[] buffer, int bufferPos, int bufferSize)
+        public void Set(Stream input, byte[] buffer, int bufferPos, int bufferSize, bool leaveOpen)
         {
             this.input = input;
             this.buffer = buffer;
@@ -214,6 +215,7 @@ namespace Google.Protobuf
             this.bufferSize = bufferSize;
             this.sizeLimit = DefaultSizeLimit;
             this.recursionLimit = DefaultRecursionLimit;
+            this.leaveOpen = leaveOpen;
         }
 
         /// <summary>
@@ -472,7 +474,7 @@ namespace Google.Protobuf
             if (startField != endField)
             {
                 throw new InvalidProtocolBufferException(
-                    "Mismatched end-group tag. Started with field " + startField + "; ended with field " + endField);
+                    $"Mismatched end-group tag. Started with field {startField}; ended with field {endField}");
             }
             recursionDepth--;
         }

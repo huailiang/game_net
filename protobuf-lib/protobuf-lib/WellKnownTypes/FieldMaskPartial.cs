@@ -59,9 +59,12 @@ namespace Google.Protobuf.WellKnownTypes
             if (firstInvalid == null)
             {
                 var writer = new StringWriter();
+#if NET35
                 var query = paths.Select(JsonFormatter.ToJsonName);
                 JsonFormatter.WriteString(writer, string.Join(",", query.ToArray()));
-
+#else
+                JsonFormatter.WriteString(writer, string.Join(",", paths.Select(JsonFormatter.ToJsonName)));
+#endif
                 return writer.ToString();
             }
             else
@@ -76,7 +79,7 @@ namespace Google.Protobuf.WellKnownTypes
                 }
                 else
                 {
-                    throw new InvalidOperationException("Invalid field mask to be converted to JSON: "+firstInvalid);
+                    throw new InvalidOperationException($"Invalid field mask to be converted to JSON: {firstInvalid}");
                 }
             }
         }

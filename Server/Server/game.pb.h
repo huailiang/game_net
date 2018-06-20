@@ -24,12 +24,11 @@
 #include <google/protobuf/arenastring.h>
 #include <google/protobuf/generated_message_table_driven.h>
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/metadata.h>
-#include <google/protobuf/message.h>
+#include <google/protobuf/metadata_lite.h>
+#include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/generated_enum_reflection.h>
-#include <google/protobuf/unknown_field_set.h>
+#include <google/protobuf/generated_enum_util.h>
 // @@protoc_insertion_point(includes)
 
 namespace protobuf_game_2eproto {
@@ -37,25 +36,21 @@ namespace protobuf_game_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[4];
+  static const ::google::protobuf::internal::ParseTable schema[3];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
-void AddDescriptors();
 void InitDefaultsPeople_PhoneNumberImpl();
 void InitDefaultsPeople_PhoneNumber();
 void InitDefaultsPeopleImpl();
 void InitDefaultsPeople();
 void InitDefaultsStudentImpl();
 void InitDefaultsStudent();
-void InitDefaultsTestImpl();
-void InitDefaultsTest();
 inline void InitDefaults() {
   InitDefaultsPeople_PhoneNumber();
   InitDefaultsPeople();
   InitDefaultsStudent();
-  InitDefaultsTest();
 }
 }  // namespace protobuf_game_2eproto
 namespace XNet {
@@ -68,9 +63,6 @@ extern People_PhoneNumberDefaultTypeInternal _People_PhoneNumber_default_instanc
 class Student;
 class StudentDefaultTypeInternal;
 extern StudentDefaultTypeInternal _Student_default_instance_;
-class Test;
-class TestDefaultTypeInternal;
-extern TestDefaultTypeInternal _Test_default_instance_;
 }  // namespace XNet
 namespace XNet {
 
@@ -86,19 +78,9 @@ const People_PhoneType People_PhoneType_PhoneType_MIN = People_PhoneType_MOBILE;
 const People_PhoneType People_PhoneType_PhoneType_MAX = People_PhoneType_WORK;
 const int People_PhoneType_PhoneType_ARRAYSIZE = People_PhoneType_PhoneType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* People_PhoneType_descriptor();
-inline const ::std::string& People_PhoneType_Name(People_PhoneType value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    People_PhoneType_descriptor(), value);
-}
-inline bool People_PhoneType_Parse(
-    const ::std::string& name, People_PhoneType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<People_PhoneType>(
-    People_PhoneType_descriptor(), name, value);
-}
 // ===================================================================
 
-class People_PhoneNumber : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:XNet.People.PhoneNumber) */ {
+class People_PhoneNumber : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:XNet.People.PhoneNumber) */ {
  public:
   People_PhoneNumber();
   virtual ~People_PhoneNumber();
@@ -124,7 +106,6 @@ class People_PhoneNumber : public ::google::protobuf::Message /* @@protoc_insert
     return *this;
   }
   #endif
-  static const ::google::protobuf::Descriptor* descriptor();
   static const People_PhoneNumber& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -145,8 +126,8 @@ class People_PhoneNumber : public ::google::protobuf::Message /* @@protoc_insert
   inline People_PhoneNumber* New() const PROTOBUF_FINAL { return New(NULL); }
 
   People_PhoneNumber* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    PROTOBUF_FINAL;
   void CopyFrom(const People_PhoneNumber& from);
   void MergeFrom(const People_PhoneNumber& from);
   void Clear() PROTOBUF_FINAL;
@@ -157,13 +138,12 @@ class People_PhoneNumber : public ::google::protobuf::Message /* @@protoc_insert
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  void DiscardUnknownFields();
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void SetCachedSize(int size) const;
   void InternalSwap(People_PhoneNumber* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -174,7 +154,7 @@ class People_PhoneNumber : public ::google::protobuf::Message /* @@protoc_insert
   }
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+  ::std::string GetTypeName() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
@@ -203,7 +183,7 @@ class People_PhoneNumber : public ::google::protobuf::Message /* @@protoc_insert
   // @@protoc_insertion_point(class_scope:XNet.People.PhoneNumber)
  private:
 
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr number_;
   int type_;
   mutable int _cached_size_;
@@ -212,7 +192,7 @@ class People_PhoneNumber : public ::google::protobuf::Message /* @@protoc_insert
 };
 // -------------------------------------------------------------------
 
-class People : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:XNet.People) */ {
+class People : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:XNet.People) */ {
  public:
   People();
   virtual ~People();
@@ -238,7 +218,6 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
     return *this;
   }
   #endif
-  static const ::google::protobuf::Descriptor* descriptor();
   static const People& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -259,8 +238,8 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   inline People* New() const PROTOBUF_FINAL { return New(NULL); }
 
   People* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    PROTOBUF_FINAL;
   void CopyFrom(const People& from);
   void MergeFrom(const People& from);
   void Clear() PROTOBUF_FINAL;
@@ -271,13 +250,12 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  void DiscardUnknownFields();
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void SetCachedSize(int size) const;
   void InternalSwap(People* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -288,7 +266,7 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   }
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+  ::std::string GetTypeName() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
@@ -310,17 +288,6 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
     People_PhoneType_PhoneType_MAX;
   static const int PhoneType_ARRAYSIZE =
     People_PhoneType_PhoneType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  PhoneType_descriptor() {
-    return People_PhoneType_descriptor();
-  }
-  static inline const ::std::string& PhoneType_Name(PhoneType value) {
-    return People_PhoneType_Name(value);
-  }
-  static inline bool PhoneType_Parse(const ::std::string& name,
-      PhoneType* value) {
-    return People_PhoneType_Parse(name, value);
-  }
 
   // accessors -------------------------------------------------------
 
@@ -385,7 +352,7 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   // @@protoc_insertion_point(class_scope:XNet.People)
  private:
 
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > snip_;
   mutable int _snip_cached_byte_size_;
   ::google::protobuf::RepeatedPtrField< ::XNet::People_PhoneNumber > phones_;
@@ -398,7 +365,7 @@ class People : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 };
 // -------------------------------------------------------------------
 
-class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:XNet.Student) */ {
+class Student : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:XNet.Student) */ {
  public:
   Student();
   virtual ~Student();
@@ -424,7 +391,6 @@ class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(c
     return *this;
   }
   #endif
-  static const ::google::protobuf::Descriptor* descriptor();
   static const Student& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
@@ -445,8 +411,8 @@ class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   inline Student* New() const PROTOBUF_FINAL { return New(NULL); }
 
   Student* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from)
+    PROTOBUF_FINAL;
   void CopyFrom(const Student& from);
   void MergeFrom(const Student& from);
   void Clear() PROTOBUF_FINAL;
@@ -457,13 +423,12 @@ class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(c
       ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  void DiscardUnknownFields();
   int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void SetCachedSize(int size) const;
   void InternalSwap(Student* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
@@ -474,7 +439,7 @@ class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   }
   public:
 
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+  ::std::string GetTypeName() const PROTOBUF_FINAL;
 
   // nested types ----------------------------------------------------
 
@@ -509,119 +474,13 @@ class Student : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   // @@protoc_insertion_point(class_scope:XNet.Student)
  private:
 
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::InternalMetadataWithArenaLite _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::int32 age_;
   ::google::protobuf::int32 num_;
   mutable int _cached_size_;
   friend struct ::protobuf_game_2eproto::TableStruct;
   friend void ::protobuf_game_2eproto::InitDefaultsStudentImpl();
-};
-// -------------------------------------------------------------------
-
-class Test : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:XNet.Test) */ {
- public:
-  Test();
-  virtual ~Test();
-
-  Test(const Test& from);
-
-  inline Test& operator=(const Test& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  #if LANG_CXX11
-  Test(Test&& from) noexcept
-    : Test() {
-    *this = ::std::move(from);
-  }
-
-  inline Test& operator=(Test&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-  #endif
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Test& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Test* internal_default_instance() {
-    return reinterpret_cast<const Test*>(
-               &_Test_default_instance_);
-  }
-  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
-
-  void Swap(Test* other);
-  friend void swap(Test& a, Test& b) {
-    a.Swap(&b);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline Test* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  Test* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const Test& from);
-  void MergeFrom(const Test& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(Test* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // int32 index = 1;
-  void clear_index();
-  static const int kIndexFieldNumber = 1;
-  ::google::protobuf::int32 index() const;
-  void set_index(::google::protobuf::int32 value);
-
-  // int32 age = 2;
-  void clear_age();
-  static const int kAgeFieldNumber = 2;
-  ::google::protobuf::int32 age() const;
-  void set_age(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:XNet.Test)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::int32 index_;
-  ::google::protobuf::int32 age_;
-  mutable int _cached_size_;
-  friend struct ::protobuf_game_2eproto::TableStruct;
-  friend void ::protobuf_game_2eproto::InitDefaultsTestImpl();
 };
 // ===================================================================
 
@@ -970,43 +829,9 @@ inline void Student::set_num(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:XNet.Student.num)
 }
 
-// -------------------------------------------------------------------
-
-// Test
-
-// int32 index = 1;
-inline void Test::clear_index() {
-  index_ = 0;
-}
-inline ::google::protobuf::int32 Test::index() const {
-  // @@protoc_insertion_point(field_get:XNet.Test.index)
-  return index_;
-}
-inline void Test::set_index(::google::protobuf::int32 value) {
-  
-  index_ = value;
-  // @@protoc_insertion_point(field_set:XNet.Test.index)
-}
-
-// int32 age = 2;
-inline void Test::clear_age() {
-  age_ = 0;
-}
-inline ::google::protobuf::int32 Test::age() const {
-  // @@protoc_insertion_point(field_get:XNet.Test.age)
-  return age_;
-}
-inline void Test::set_age(::google::protobuf::int32 value) {
-  
-  age_ = value;
-  // @@protoc_insertion_point(field_set:XNet.Test.age)
-}
-
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -1020,10 +845,6 @@ namespace google {
 namespace protobuf {
 
 template <> struct is_proto_enum< ::XNet::People_PhoneType> : ::google::protobuf::internal::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::XNet::People_PhoneType>() {
-  return ::XNet::People_PhoneType_descriptor();
-}
 
 }  // namespace protobuf
 }  // namespace google

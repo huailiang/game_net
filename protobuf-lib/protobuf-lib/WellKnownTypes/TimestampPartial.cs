@@ -45,10 +45,11 @@ namespace Google.Protobuf.WellKnownTypes
         internal const long UnixSecondsAtBclMinValue = -BclSecondsAtUnixEpoch;
         internal const int MaxNanos = Duration.NanosecondsPerSecond - 1;
 
-        private static bool IsNormalized(long seconds, int nanoseconds)
-        {
-            return nanoseconds >= 0 && nanoseconds <= MaxNanos && seconds >= UnixSecondsAtBclMinValue && seconds <= UnixSecondsAtBclMaxValue;
-        }
+        private static bool IsNormalized(long seconds, int nanoseconds) =>
+            nanoseconds >= 0 &&
+            nanoseconds <= MaxNanos &&
+            seconds >= UnixSecondsAtBclMinValue &&
+            seconds <= UnixSecondsAtBclMaxValue;
 
         /// <summary>
         /// Returns the difference between one <see cref="Timestamp"/> and another, as a <see cref="Duration"/>.

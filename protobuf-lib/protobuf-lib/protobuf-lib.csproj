@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7C1746D-9842-4991-9870-AFCE020AAD46}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>protobuf_lib</RootNamespace>
+    <AssemblyName>protobuf-lib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET35</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ByteArray.cs" />
+    <Compile Include="ByteString.cs" />
+    <Compile Include="CodedInputStream.cs" />
+    <Compile Include="CodedOutputStream.ComputeSize.cs" />
+    <Compile Include="CodedOutputStream.cs" />
+    <Compile Include="Collections\Lists.cs" />
+    <Compile Include="Collections\MapField.cs" />
+    <Compile Include="Collections\ProtobufEqualityComparers.cs" />
+    <Compile Include="Collections\ReadOnlyDictionary.cs" />
+    <Compile Include="Collections\RepeatedField.cs" />
+    <Compile Include="Compatibility\PropertyInfoExtensions.cs" />
+    <Compile Include="Compatibility\StreamExtensions.cs" />
+    <Compile Include="FieldCodec.cs" />
+    <Compile Include="FrameworkPortability.cs" />
+    <Compile Include="ICustomDiagnosticMessage.cs" />
+    <Compile Include="IDeepCloneable.cs" />
+    <Compile Include="IMessage.cs" />
+    <Compile Include="InvalidJsonException.cs" />
+    <Compile Include="InvalidProtocolBufferException.cs" />
+    <Compile Include="JsonFormatter.cs" />
+    <Compile Include="JsonParser.cs" />
+    <Compile Include="JsonToken.cs" />
+    <Compile Include="JsonTokenizer.cs" />
+    <Compile Include="LimitedInputStream.cs" />
+    <Compile Include="MessageExtensions.cs" />
+    <Compile Include="MessageParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProtoPreconditions.cs" />
+    <Compile Include="Reflection\CustomOptions.cs" />
+    <Compile Include="Reflection\Descriptor.cs" />
+    <Compile Include="Reflection\DescriptorBase.cs" />
+    <Compile Include="Reflection\DescriptorPool.cs" />
+    <Compile Include="Reflection\DescriptorUtil.cs" />
+    <Compile Include="Reflection\DescriptorValidationException.cs" />
+    <Compile Include="Reflection\EnumDescriptor.cs" />
+    <Compile Include="Reflection\EnumValueDescriptor.cs" />
+    <Compile Include="Reflection\FieldAccessorBase.cs" />
+    <Compile Include="Reflection\FieldDescriptor.cs" />
+    <Compile Include="Reflection\FieldType.cs" />
+    <Compile Include="Reflection\FileDescriptor.cs" />
+    <Compile Include="Reflection\GeneratedClrTypeInfo.cs" />
+    <Compile Include="Reflection\IDescriptor.cs" />
+    <Compile Include="Reflection\IFieldAccessor.cs" />
+    <Compile Include="Reflection\MapFieldAccessor.cs" />
+    <Compile Include="Reflection\MessageDescriptor.cs" />
+    <Compile Include="Reflection\MethodDescriptor.cs" />
+    <Compile Include="Reflection\OneofAccessor.cs" />
+    <Compile Include="Reflection\OneofDescriptor.cs" />
+    <Compile Include="Reflection\OriginalNameAttribute.cs" />
+    <Compile Include="Reflection\PackageDescriptor.cs" />
+    <Compile Include="Reflection\PartialClasses.cs" />
+    <Compile Include="Reflection\ReflectionUtil.cs" />
+    <Compile Include="Reflection\RepeatedFieldAccessor.cs" />
+    <Compile Include="Reflection\ServiceDescriptor.cs" />
+    <Compile Include="Reflection\SingleFieldAccessor.cs" />
+    <Compile Include="Reflection\TypeRegistry.cs" />
+    <Compile Include="UnknownField.cs" />
+    <Compile Include="UnknownFieldSet.cs" />
+    <Compile Include="WellKnownTypes\Any.cs" />
+    <Compile Include="WellKnownTypes\AnyPartial.cs" />
+    <Compile Include="WellKnownTypes\Api.cs" />
+    <Compile Include="WellKnownTypes\Duration.cs" />
+    <Compile Include="WellKnownTypes\DurationPartial.cs" />
+    <Compile Include="WellKnownTypes\Empty.cs" />
+    <Compile Include="WellKnownTypes\FieldMask.cs" />
+    <Compile Include="WellKnownTypes\FieldMaskPartial.cs" />
+    <Compile Include="WellKnownTypes\SourceContext.cs" />
+    <Compile Include="WellKnownTypes\Struct.cs" />
+    <Compile Include="WellKnownTypes\TimeExtensions.cs" />
+    <Compile Include="WellKnownTypes\Timestamp.cs" />
+    <Compile Include="WellKnownTypes\TimestampPartial.cs" />
+    <Compile Include="WellKnownTypes\Type.cs" />
+    <Compile Include="WellKnownTypes\ValuePartial.cs" />
+    <Compile Include="WellKnownTypes\Wrappers.cs" />
+    <Compile Include="WellKnownTypes\WrappersPartial.cs" />
+    <Compile Include="WireFormat.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AssemblyInfo.cs.meta" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(UnityInstallPath)\Editor\Data\MonoBleedingEdge\bin\mono.exe" "$(UnityInstallPath)\Editor\Data\MonoBleedingEdge\lib\mono\4.5\pdb2mdb.exe" $(TargetFileName)
+copy /Y $(TargetFileName).mdb "$(SolutionDir)\..\UnityEnv\Assets\lib\$(TargetFileName).mdb"
+copy /Y $(TargetFileName) "$(SolutionDir)\..\UnityEnv\Assets\lib\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
